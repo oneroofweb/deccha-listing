@@ -1,42 +1,338 @@
-/* Custom Justdial Orange */
-.btn-orange {
-    background-color: #ff3e00; 
-    border-color: #ff3e00;
-}
-.btn-orange:hover {
-    background-color: #e63800;
-}
-
-/* Colors */
+/* Custom Colors */
 .text-primary { color: #0076d7 !important; }
 .text-warning { color: #ff9900 !important; }
+.btn-primary { background-color: #0076d7; border-color: #0076d7; }
+.btn-outline-primary { color: #0076d7; border-color: #0076d7; }
+.btn-outline-primary:hover { background-color: #0076d7; color: white; }
 
-/* Desktop Search Boxes */
-.search-box {
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Subtle shadow for depth */
-    transition: box-shadow 0.2s;
+/* Desktop Input Sizing */
+.w-35 {
+    width: 35%;
 }
 
-.search-box:focus-within {
-    box-shadow: 0 0 0 2px rgba(0, 118, 215, 0.2); /* Blue glow on focus */
-    border-color: #0076d7 !important;
-}
-
-.search-box input:focus {
+/* Input Focus States */
+.form-control:focus {
     box-shadow: none;
-    background-color: transparent;
 }
 
-/* Nav Links */
-.nav-icon-link {
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.2s;
+.input-group:focus-within {
+    box-shadow: 0 0 0 2px rgba(0, 118, 215, 0.2);
+    border-color: #0076d7 !important;
+    background-color: white;
 }
-.nav-icon-link:hover { color: #0076d7 !important; }
-.nav-icon-link i { font-size: 16px; }
 
-/* Mobile Spacing */
+/* Mobile Adjustments */
 @media (max-width: 991px) {
-    .container-fluid { padding-top: 5px; padding-bottom: 5px; }
+    .container-fluid {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+
+/* ============================
+   CATEGORY GRID STYLES
+   ============================ */
+
+.custom-category-grid {
+    display: grid;
+    /* Mobile View: 4 Columns */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px 10px; /* Row Gap: 20px, Col Gap: 10px */
+}
+
+/* Desktop Breakpoint (Large Screens) */
+@media (min-width: 992px) {
+    .custom-category-grid {
+        /* Desktop View: 8 Columns */
+        grid-template-columns: repeat(8, 1fr); 
+        gap: 30px;
+    }
+}
+
+/* Icon Box Styling */
+.icon-box {
+    width: 55px;
+    height: 55px;
+    border-radius: 12px; /* Soft square rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #f0f0f0;
+}
+
+/* Label Styling */
+.cat-label {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    display: block;
+    color: #333;
+    padding: 0 5px;
+}
+
+/* Hover Effects */
+.cat-item:hover .icon-box {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background-color: white !important; /* Optional: turn white on hover */
+    border-color: #e0e0e0;
+}
+
+.cat-item:hover .cat-label {
+    color: #0d6efd; /* Bootstrap Primary Color */
+}
+
+/* Mobile Font Adjustment */
+@media (max-width: 768px) {
+    .icon-box {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        border-radius: 10px;
+    }
+    .cat-label {
+        font-size: 11px;
+    }
+}
+
+/* ============================
+   SERVICE CARD STYLES - Section 2
+   ============================ */
+
+/* Card Container */
+.service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px; /* Smooth corners */
+    overflow: hidden;
+}
+
+/* Hover Effect: Lift Card Up */
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Image Wrapper to force fixed height */
+.service-card .img-wrapper {
+    height: 200px; /* Fixed height for consistent look */
+    overflow: hidden;
+}
+
+/* Image Styling */
+.service-card .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image fills box without stretching */
+    transition: transform 0.5s ease;
+}
+
+/* Zoom Image on Hover */
+.service-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Card Body Text */
+.service-card .card-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.service-card .card-text {
+    min-height: 40px; /* Aligns buttons evenly even if text length varies */
+    line-height: 1.4;
+}
+
+/* Button Customization */
+.btn-outline-primary {
+    color: #0076d7;
+    border-color: #0076d7;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0076d7;
+    color: #fff;
+}
+
+/* ============================
+   Show All Button Styling
+   ============================ */
+.btn-white {
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.btn-white:hover {
+    background-color: #f8f9fa; /* Light Gray on Hover */
+    transform: translateY(-2px); /* Slight Lift */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important; /* Deeper Shadow */
+    color: #0076d7 !important; /* Text turns blue */
+}
+
+/* ============================
+   BANNER SLIDER STYLES
+   ============================ */
+
+/* 1. Mobile View (Full Image Logic) */
+.banner-img {
+    width: 100%;           /* Full Width */
+    height: auto;          /* Height automatic adjust hogi image ke hisab se */
+    object-fit: contain;   /* Image crop nahi hogi, puri dikhegi */
+    aspect-ratio: 16/9;    /* (Optional) Layout shift rokne ke liye standard ratio */
+}
+
+/* 2. Desktop View (Fixed Height Logic) */
+@media (min-width: 992px) {
+    .banner-img {
+        height: 400px;      /* Desktop par fixed height taaki content niche na bhage */
+        object-fit: cover;  /* Desktop par wide fill karega */
+        aspect-ratio: auto; /* Reset aspect ratio for desktop */
+    }
+}
+
+/* 3. Custom Navigation Buttons */
+.custom-nav-btn {
+    width: 40px;            /* Mobile me thoda chhota button */
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 992px) {
+    .custom-nav-btn {
+        width: 45px; /* Desktop par normal size */
+        height: 45px;
+    }
+}
+
+/* Hover Effect */
+.carousel-control-prev:hover .custom-nav-btn,
+.carousel-control-next:hover .custom-nav-btn {
+    background-color: #fff;
+    transform: scale(1.1);
+    color: #0076d7;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    opacity: 1; 
+    width: 50px;
+}
+
+/* ============================
+   HOW IT WORKS STYLES
+   ============================ */
+
+/* 1. Card Container */
+.work-card {
+    background: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 16px; /* Soft rounded corners */
+}
+
+/* Hover Effect: Lift up */
+.work-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* 2. Icon Circle */
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Perfect Circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Needed for the step badge */
+    transition: all 0.3s ease;
+}
+
+/* 3. Small Step Number Badge (1, 2, 3, 4) */
+.step-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+}
+
+/* 4. Text Spacing */
+.ls-2 {
+    letter-spacing: 2px;
+}
+
+/* 5. Custom Background Colors (Bootstrap-like subtles) */
+.bg-primary-subtle { background-color: rgba(13, 110, 253, 0.1); }
+.bg-warning-subtle { background-color: rgba(255, 193, 7, 0.1); }
+.bg-danger-subtle { background-color: rgba(220, 53, 69, 0.1); }
+.bg-success-subtle { background-color: rgba(25, 135, 84, 0.1); }
+
+/* ============================
+   BLOG SECTION STYLES
+   ============================ */
+
+/* 1. Card Container */
+.blog-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px); /* Lift card up */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 2. Image Wrapper & Hover Zoom */
+.blog-img-wrapper {
+    height: 220px; /* Fixed height for uniformity */
+    overflow: hidden;
+}
+
+.blog-card .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Zoom Image on Hover */
+.blog-card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+/* 3. Title Link Effect */
+.blog-card .card-title a {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s;
+}
+
+.blog-card:hover .card-title a {
+    background-size: 100% 2px; /* Underline animation on hover */
+    color: #0076d7 !important;
+}
+
+/* 4. Arrow Animation */
+.blog-card:hover .fa-arrow-right {
+    transform: translateX(5px);
+    transition: transform 0.3s ease;
 }
