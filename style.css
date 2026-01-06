@@ -1,0 +1,42 @@
+/* Custom Justdial Orange */
+.btn-orange {
+    background-color: #ff3e00; 
+    border-color: #ff3e00;
+}
+.btn-orange:hover {
+    background-color: #e63800;
+}
+
+/* Colors */
+.text-primary { color: #0076d7 !important; }
+.text-warning { color: #ff9900 !important; }
+
+/* Desktop Search Boxes */
+.search-box {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+    transition: box-shadow 0.2s;
+}
+
+.search-box:focus-within {
+    box-shadow: 0 0 0 2px rgba(0, 118, 215, 0.2); /* Blue glow on focus */
+    border-color: #0076d7 !important;
+}
+
+.search-box input:focus {
+    box-shadow: none;
+    background-color: transparent;
+}
+
+/* Nav Links */
+.nav-icon-link {
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.nav-icon-link:hover { color: #0076d7 !important; }
+.nav-icon-link i { font-size: 16px; }
+
+/* Mobile Spacing */
+@media (max-width: 991px) {
+    .container-fluid { padding-top: 5px; padding-bottom: 5px; }
+}
