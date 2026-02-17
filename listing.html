@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planners Listing - Lucknow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-orange: #e65100;
+            --primary-blue: #283593;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-gray: #f4f6f9;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: var(--text-dark);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- HEADER --- */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-orange);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .logo span { color: var(--primary-blue); }
+
+        /* Complex Search Bar */
+        .search-bar-wrapper {
+            display: flex;
+            flex: 1;
+            max-width: 600px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            display: none; /* Hidden on small mobile initially */
+        }
+        
+        .loc-input, .main-search-input {
+            border: none;
+            padding: 10px;
+            outline: none;
+        }
+        
+        .loc-wrapper {
+            display: flex;
+            align-items: center;
+            border-right: 1px solid var(--border-color);
+            padding: 0 10px;
+            background: #f9f9f9;
+        }
+        
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            padding: 0 10px;
+            background: white;
+        }
+
+        .search-input-wrapper input { width: 100%; }
+        
+        .search-btn {
+            background: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-list-business {
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #f8f8f8;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .btn-list-business span {
+            background: var(--primary-orange);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 2px;
+            font-size: 10px;
+            margin-left: 5px;
+        }
+
+        /* --- BREADCRUMBS & TITLE --- */
+        .page-header {
+            padding: 15px 0;
+        }
+        .breadcrumbs { font-size: 12px; color: var(--text-light); margin-bottom: 10px; }
+        h1 { font-size: 22px; margin-bottom: 20px; }
+
+        /* --- MAIN LAYOUT --- */
+        .main-content {
+            display: flex;
+            gap: 25px;
+            padding-bottom: 50px;
+        }
+
+        /* --- LISTINGS COLUMN (Left) --- */
+        .listings-wrapper {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .listing-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            padding: 15px;
+            gap: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .listing-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .card-image {
+            width: 220px;
+            height: 180px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .since-badge {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.9);
+            text-align: center;
+            font-size: 12px;
+            padding: 5px;
+            color: var(--text-light);
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .card-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 18px;
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .card-location {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .tag {
+            background: #eee;
+            color: #555;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .features {
+            font-size: 13px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        .features i { color: green; margin-right: 5px; }
+        
+        .open-hours { font-size: 12px; color: var(--text-light); margin-bottom: 15px; }
+
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
+        }
+
+        .btn-group { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-blue { background: var(--primary-blue); color: white; border: none; }
+        .btn-orange { background: var(--primary-orange); color: white; border: none; }
+
+        .stats { font-size: 11px; color: #888; display: flex; gap: 15px; }
+
+        /* --- SIDEBAR FORM (Right) --- */
+        .sidebar-wrapper {
+            flex: 1.2;
+        }
+
+        .lead-form {
+            background: #f0f8ff; /* Light blue tint */
+            padding: 20px;
+            border: 1px solid #b3e5fc;
+            border-radius: 8px;
+            position: sticky;
+            top: 80px; /* Sticks when scrolling */
+        }
+
+        .lead-form h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .lead-form h3 span { color: var(--primary-orange); }
+
+        .form-group { margin-bottom: 12px; position: relative; }
+        .form-group i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 10px 10px 35px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        textarea.form-control {
+            height: 80px;
+            resize: none;
+            padding-left: 35px;
+            padding-top: 10px;
+            top: 0;
+            transform: none;
+        }
+        .form-group textarea + i { top: 20px; transform: none; }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (min-width: 769px) {
+            .search-bar-wrapper { display: flex; }
+        }
+
+        @media (max-width: 992px) {
+            .card-image { width: 180px; height: 160px; }
+        }
+
+        @media (max-width: 768px) {
+            .main-content { flex-direction: column; }
+            .search-bar-wrapper { display: none; } /* Use icons on mobile */
+            
+            .listing-card { flex-direction: column; }
+            .card-image { width: 100%; height: 200px; }
+            
+            .card-actions {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .stats { width: 100%; justify-content: space-between; border-top: 1px solid #eee; padding-top: 10px;}
+            
+            .sidebar-wrapper { order: 2; } /* Form goes to bottom on mobile */
+            
+            .btn-list-business { display: none; } /* Save space */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo"><i class="fas fa-map-marker-alt"></i><span>Deecha</span></a>
+
+            <div class="search-bar-wrapper">
+                <div class="loc-wrapper">
+                    <i class="fas fa-map-marker-alt text-light"></i>
+                    <input type="text" class="loc-input" value="Lucknow (UP)">
+                </div>
+                <div class="search-input-wrapper">
+                    <input type="text" class="main-search-input" placeholder="Search in Lucknow (UP)">
+                    <i class="fas fa-microphone text-primary-orange"></i>
+                </div>
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="header-actions">
+                <a href="#" class="btn-list-business">List Your Business <span>Free</span></a>
+                <i class="fas fa-bars fa-lg"></i>
+                <i class="fas fa-user-circle fa-lg"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-header">
+            <div class="breadcrumbs">
+                <i class="fas fa-home"></i> &gt; Party Event Planners & Suppliers in Lucknow
+            </div>
+            <h1>Best 20 Event Management Companies in Lucknow</h1>
+        </div>
+
+        <div class="main-content">
+            
+            <div class="listings-wrapper">
+
+                <div class="listing-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Greenfields">
+                        <div class="since-badge">Since 2015</div>
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <div class="card-title">Greenfields Gardens - Marriage Hall In Lucknow</div>
+                            <div class="card-location">
+                                <i class="fas fa-map-marker-alt text-primary-orange"></i> 
+                                Ranjit Singh Building Compound, Rajaji Puram, Lucknow, Uttar Pradesh - Rajajipuram...
+                            </div>
+                            <div class="tags">
+                                <span class="tag">Wedding Companies</span>
+                                <span class="tag">Artists</span>
+                            </div>
+                            <div class="features">
+                                <i class="fas fa-check"></i> Wedding Planning 
+                                <i class="fas fa-check"></i> Venue Selection 
+                                <i class="fas fa-check"></i> Wedding Hosting
+                            </div>
+                            <div class="open-hours">Open: 9:00 AM - 7:00 PM - 24x7</div>
+                        </div>
+                        
+                        <div class="card-actions">
+                            <div class="btn-group">
+                                <button class="btn btn-blue" onclick="toggleNumber(this)"><i class="fas fa-phone-alt"></i> Show Number</button>
+                                <button class="btn btn-orange"><i class="fas fa-envelope"></i> Send Enquiry</button>
+                            </div>
+                            <div class="stats">
+                                <span><i class="fas fa-eye"></i> 253 Views</span>
+                                <span><i class="fas fa-users"></i> 2 Enquiries</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="listing-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="JM Events">
+                        <div class="since-badge">Since 2018</div>
+                    </div>
+                    <div class="card-details">
+                        <div>
+                            <div class="card-title">JM Events And Advertisers</div>
+                            <div class="card-location">
+                                <i class="fas fa-map-marker-alt text-primary-orange"></i> 
+                                GF-2, Ansal City Centre, Hazratganj, Lucknow, Uttar Pradesh 226001
+                            </div>
+                            <div class="tags">
+                                <span class="tag">Event Mgmt</span>
+                                <span class="tag">Item Dealers</span>
+                            </div>
+                            <div class="features">
+                                <i class="fas fa-check"></i> Corporate Events 
+                                <i class="fas fa-check"></i> Wedding Planning
+                            </div>
+                            <div class="open-hours">Open: 10:00 AM - 8:00 PM</div>
+                        </div>
+                        
+                        <div class="card-actions">
+                            <div class="btn-group">
+                                <button class="btn btn-blue" onclick="toggleNumber(this)"><i class="fas fa-phone-alt"></i> Show Number</button>
+                                <button class="btn btn-orange"><i class="fas fa-envelope"></i> Send Enquiry</button>
+                            </div>
+                            <div class="stats">
+                                <span><i class="fas fa-eye"></i> 112 Views</span>
+                                <span><i class="fas fa-users"></i> 5 Enquiries</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="sidebar-wrapper">
+                <div class="lead-form">
+                    <h3>Connect with <span>Top Party Event Planners</span> in Lucknow</h3>
+                    <form>
+                        <div class="form-group">
+                            <i class="fas fa-mobile-alt"></i>
+                            <input type="text" class="form-control" placeholder="Enter your Mobile No.">
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" class="form-control" placeholder="Enter your Name">
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-comment-dots"></i>
+                            <textarea class="form-control" placeholder="What is your Requirement?"></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Enquiry</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleNumber(btn) {
+            const originalText = '<i class="fas fa-phone-alt"></i> Show Number';
+            const numberText = '<i class="fas fa-phone-alt"></i> +91 98765 43210';
+            
+            if (btn.innerHTML.includes('Show Number')) {
+                btn.innerHTML = numberText;
+                btn.style.backgroundColor = '#1a237e'; // Darker blue
+            } else {
+                btn.innerHTML = originalText;
+                btn.style.backgroundColor = '';
+            }
+        }
+    </script>
+</body>
+</html>

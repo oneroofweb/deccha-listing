@@ -1,338 +1,411 @@
-/* Custom Colors */
-.text-primary { color: #0076d7 !important; }
-.text-warning { color: #ff9900 !important; }
-.btn-primary { background-color: #0076d7; border-color: #0076d7; }
-.btn-outline-primary { color: #0076d7; border-color: #0076d7; }
-.btn-outline-primary:hover { background-color: #0076d7; color: white; }
-
-/* Desktop Input Sizing */
-.w-35 {
-    width: 35%;
+/* =========================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================= */
+:root {
+  --primary-blue: #0076d7;
+  --primary-dark: #2c3e50;
+  --primary-orange: #ff5722;
+  --text-dark: #333;
+  --text-light: #666;
+  --bg-light: #f8f9fa;
+  --border-color: #e0e0e0;
 }
 
-/* Input Focus States */
-.form-control:focus {
-    box-shadow: none;
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  color: var(--text-dark);
+  overflow-x: hidden;
 }
 
-.input-group:focus-within {
-    box-shadow: 0 0 0 2px rgba(0, 118, 215, 0.2);
-    border-color: #0076d7 !important;
-    background-color: white;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Mobile Adjustments */
-@media (max-width: 991px) {
-    .container-fluid {
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
+/* Global Utilities */
+.text-primary {
+  color: var(--primary-blue) !important;
 }
-
-/* ============================
-   CATEGORY GRID STYLES
-   ============================ */
-
-.custom-category-grid {
-    display: grid;
-    /* Mobile View: 4 Columns */
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 20px 10px; /* Row Gap: 20px, Col Gap: 10px */
+.text-warning {
+  color: #ff9900 !important;
 }
-
-/* Desktop Breakpoint (Large Screens) */
-@media (min-width: 992px) {
-    .custom-category-grid {
-        /* Desktop View: 8 Columns */
-        grid-template-columns: repeat(8, 1fr); 
-        gap: 30px;
-    }
+.btn-primary {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
 }
-
-/* Icon Box Styling */
-.icon-box {
-    width: 55px;
-    height: 55px;
-    border-radius: 12px; /* Soft square rounded corners */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: 1px solid #f0f0f0;
-}
-
-/* Label Styling */
-.cat-label {
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1.3;
-    display: block;
-    color: #333;
-    padding: 0 5px;
-}
-
-/* Hover Effects */
-.cat-item:hover .icon-box {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    background-color: white !important; /* Optional: turn white on hover */
-    border-color: #e0e0e0;
-}
-
-.cat-item:hover .cat-label {
-    color: #0d6efd; /* Bootstrap Primary Color */
-}
-
-/* Mobile Font Adjustment */
-@media (max-width: 768px) {
-    .icon-box {
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
-        border-radius: 10px;
-    }
-    .cat-label {
-        font-size: 11px;
-    }
-}
-
-/* ============================
-   SERVICE CARD STYLES - Section 2
-   ============================ */
-
-/* Card Container */
-.service-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 12px; /* Smooth corners */
-    overflow: hidden;
-}
-
-/* Hover Effect: Lift Card Up */
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Image Wrapper to force fixed height */
-.service-card .img-wrapper {
-    height: 200px; /* Fixed height for consistent look */
-    overflow: hidden;
-}
-
-/* Image Styling */
-.service-card .card-img-top {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures image fills box without stretching */
-    transition: transform 0.5s ease;
-}
-
-/* Zoom Image on Hover */
-.service-card:hover .card-img-top {
-    transform: scale(1.05);
-}
-
-/* Card Body Text */
-.service-card .card-title {
-    font-size: 18px;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-.service-card .card-text {
-    min-height: 40px; /* Aligns buttons evenly even if text length varies */
-    line-height: 1.4;
-}
-
-/* Button Customization */
 .btn-outline-primary {
-    color: #0076d7;
-    border-color: #0076d7;
+  color: var(--primary-blue);
+  border-color: var(--primary-blue);
 }
-
 .btn-outline-primary:hover {
-    background-color: #0076d7;
-    color: #fff;
+  background-color: var(--primary-blue);
+  color: white;
 }
 
-/* ============================
-   Show All Button Styling
-   ============================ */
-.btn-white {
-    background-color: #ffffff;
-    transition: all 0.3s ease;
+.form-control:focus,
+.btn:focus {
+  box-shadow: none;
 }
 
-.btn-white:hover {
-    background-color: #f8f9fa; /* Light Gray on Hover */
-    transform: translateY(-2px); /* Slight Lift */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important; /* Deeper Shadow */
-    color: #0076d7 !important; /* Text turns blue */
+/* =========================================
+   2. HEADER & NAVBAR
+   ========================================= */
+/* Home Header Specifics */
+        /* --- HEADER --- */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-orange);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .logo span { color: var(--primary-blue); }
+
+        /* Complex Search Bar */
+        .search-bar-wrapper {
+            display: flex;
+            flex: 1;
+            max-width: 600px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            display: none; /* Hidden on small mobile initially */
+        }
+        
+        .loc-input, .main-search-input {
+            border: none;
+            padding: 10px;
+            outline: none;
+        }
+        
+        .loc-wrapper {
+            display: flex;
+            align-items: center;
+            border-right: 1px solid var(--border-color);
+            padding: 0 10px;
+            background: #f9f9f9;
+        }
+        
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            padding: 0 10px;
+            background: white;
+        }
+
+        .search-input-wrapper input { width: 100%; }
+        
+        .search-btn {
+            background: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-list-business {
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #f8f8f8;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .btn-list-business span {
+            background: var(--primary-orange);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 2px;
+            font-size: 10px;
+            margin-left: 5px;
+        }
+
+@media (max-width: 768px) {
+  .search-bar-wrapper {
+    display: none;
+  }
 }
 
-/* ============================
-   BANNER SLIDER STYLES
-   ============================ */
+/* =========================================
+   3. HOME PAGE SECTIONS
+   ========================================= */
+/* Category Grid */
+.custom-category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 10px;
+}
+@media (min-width: 992px) {
+  .custom-category-grid {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 30px;
+  }
+}
 
-/* 1. Mobile View (Full Image Logic) */
+.cat-item .icon-box {
+  width: 55px;
+  height: 55px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  border: 1px solid #f0f0f0;
+  transition: 0.3s;
+}
+.cat-item:hover .icon-box {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.cat-label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Service Cards */
+.service-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+.service-card .img-wrapper {
+  height: 200px;
+  overflow: hidden;
+}
+.service-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+}
+.service-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Banner Slider */
 .banner-img {
-    width: 100%;           /* Full Width */
-    height: auto;          /* Height automatic adjust hogi image ke hisab se */
-    object-fit: contain;   /* Image crop nahi hogi, puri dikhegi */
-    aspect-ratio: 16/9;    /* (Optional) Layout shift rokne ke liye standard ratio */
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  aspect-ratio: 16/9;
 }
-
-/* 2. Desktop View (Fixed Height Logic) */
 @media (min-width: 992px) {
-    .banner-img {
-        height: 400px;      /* Desktop par fixed height taaki content niche na bhage */
-        object-fit: cover;  /* Desktop par wide fill karega */
-        aspect-ratio: auto; /* Reset aspect ratio for desktop */
-    }
-}
-
-/* 3. Custom Navigation Buttons */
-.custom-nav-btn {
-    width: 40px;            /* Mobile me thoda chhota button */
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #333;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    transition: all 0.3s ease;
-}
-
-@media (min-width: 992px) {
-    .custom-nav-btn {
-        width: 45px; /* Desktop par normal size */
-        height: 45px;
-    }
-}
-
-/* Hover Effect */
-.carousel-control-prev:hover .custom-nav-btn,
-.carousel-control-next:hover .custom-nav-btn {
-    background-color: #fff;
-    transform: scale(1.1);
-    color: #0076d7;
-}
-
-.carousel-control-prev, .carousel-control-next {
-    opacity: 1; 
-    width: 50px;
-}
-
-/* ============================
-   HOW IT WORKS STYLES
-   ============================ */
-
-/* 1. Card Container */
-.work-card {
-    background: #fff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 16px; /* Soft rounded corners */
-}
-
-/* Hover Effect: Lift up */
-.work-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-/* 2. Icon Circle */
-.icon-circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%; /* Perfect Circle */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative; /* Needed for the step badge */
-    transition: all 0.3s ease;
-}
-
-/* 3. Small Step Number Badge (1, 2, 3, 4) */
-.step-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 25px;
-    height: 25px;
-    background-color: #333;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 12px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #fff;
-}
-
-/* 4. Text Spacing */
-.ls-2 {
-    letter-spacing: 2px;
-}
-
-/* 5. Custom Background Colors (Bootstrap-like subtles) */
-.bg-primary-subtle { background-color: rgba(13, 110, 253, 0.1); }
-.bg-warning-subtle { background-color: rgba(255, 193, 7, 0.1); }
-.bg-danger-subtle { background-color: rgba(220, 53, 69, 0.1); }
-.bg-success-subtle { background-color: rgba(25, 135, 84, 0.1); }
-
-/* ============================
-   BLOG SECTION STYLES
-   ============================ */
-
-/* 1. Card Container */
-.blog-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 12px;
-}
-
-.blog-card:hover {
-    transform: translateY(-5px); /* Lift card up */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* 2. Image Wrapper & Hover Zoom */
-.blog-img-wrapper {
-    height: 220px; /* Fixed height for uniformity */
-    overflow: hidden;
-}
-
-.blog-card .card-img-top {
-    width: 100%;
-    height: 100%;
+  .banner-img {
+    height: 400px;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    aspect-ratio: auto;
+  }
 }
 
-/* Zoom Image on Hover */
-.blog-card:hover .card-img-top {
-    transform: scale(1.1);
+/* Blog Cards */
+.blog-card {
+  border-radius: 12px;
+  transition: 0.3s;
+}
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+.blog-img-wrapper {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
 }
 
-/* 3. Title Link Effect */
-.blog-card .card-title a {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-position: 0% 100%;
-    background-repeat: no-repeat;
-    background-size: 0% 2px;
-    transition: background-size .3s;
+/* =========================================
+   4. LISTING PAGE (Listing.html)
+   ========================================= */
+.listing-card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  padding: 15px;
+  gap: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background: #fff;
+  margin-bottom: 20px;
+  transition: transform 0.2s;
+}
+.listing-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.blog-card:hover .card-title a {
-    background-size: 100% 2px; /* Underline animation on hover */
-    color: #0076d7 !important;
+.card-image {
+  width: 220px;
+  height: 180px;
+  position: relative;
+  flex-shrink: 0;
+}
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.since-badge {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  font-size: 12px;
 }
 
-/* 4. Arrow Animation */
-.blog-card:hover .fa-arrow-right {
-    transform: translateX(5px);
-    transition: transform 0.3s ease;
+.card-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-listing-title {
+  font-size: 18px;
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+.tag {
+  background: #eee;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-right: 5px;
+}
+
+/* Sidebar Form */
+.lead-form {
+  background: #f0f8ff;
+  padding: 20px;
+  border: 1px solid #b3e5fc;
+  border-radius: 8px;
+  position: sticky;
+  top: 90px;
+}
+.btn-submit {
+  width: 100%;
+  background: var(--primary-blue);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .listing-card {
+    flex-direction: column;
+  }
+  .card-image {
+    width: 100%;
+    height: 200px;
+  }
+}
+
+/* =========================================
+   5. DETAIL PAGE (Listing-Detail.html)
+   ========================================= */
+.listing-header {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  margin-bottom: 20px;
+}
+.content-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+.section-heading {
+  border-bottom: 2px solid #f1f1f1;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.gallery-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.gallery-img:hover {
+  transform: scale(1.05);
+}
+
+/* Buttons */
+.btn-action-blue {
+  background-color: var(--primary-dark);
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+}
+.btn-action-orange {
+  background-color: var(--primary-orange);
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+}
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+footer {
+  background-color: #212529;
+  color: white;
+  padding-top: 50px;
+}
+.footer-link {
+  transition: 0.3s;
+}
+.footer-link:hover {
+  color: var(--primary-blue) !important;
+  transform: translateX(5px);
+  display: inline-block;
 }
