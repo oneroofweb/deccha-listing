@@ -1,507 +1,415 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Planners Listing - Lucknow</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     
-    <style>
-        /* --- CSS VARIABLES & RESET --- */
-        :root {
-            --primary-orange: #e65100;
-            --primary-blue: #283593;
-            --text-dark: #333;
-            --text-light: #666;
-            --bg-gray: #f4f6f9;
-            --border-color: #e0e0e0;
-        }
+    <title>Listing Page</title>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    <meta name="robots" content="noindex" />
+  </head>
 
-        body {
-            background-color: #fff;
-            color: var(--text-dark);
-        }
+  <body class="bg-light">
+    <nav
+      class="navbar navbar-expand-lg bg-white sticky-top py-3 shadow-sm"
+      style="z-index: 1020"
+    >
+      <div class="container">
+        <a
+          class="navbar-brand fw-bold d-flex align-items-center gap-2 me-4 text-primary"
+          href="index.html"
+          style="font-size: 1.5rem;"
+        >
+          <i class="fa-solid fa-headset"></i> Deecha
+        </a>
 
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
+        <button
+          class="navbar-toggler border-0 shadow-none"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#mobileMenu"
+        >
+          <span class="fa-solid fa-bars-staggered fa-lg text-dark"></span>
+        </button>
 
-        /* --- HEADER --- */
-        header {
-            border-bottom: 1px solid var(--border-color);
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            background: #fff;
-            z-index: 100;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary-orange);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .logo span { color: var(--primary-blue); }
-
-        /* Complex Search Bar */
-        .search-bar-wrapper {
-            display: flex;
-            flex: 1;
-            max-width: 600px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
-            display: none; /* Hidden on small mobile initially */
-        }
-        
-        .loc-input, .main-search-input {
-            border: none;
-            padding: 10px;
-            outline: none;
-        }
-        
-        .loc-wrapper {
-            display: flex;
-            align-items: center;
-            border-right: 1px solid var(--border-color);
-            padding: 0 10px;
-            background: #f9f9f9;
-        }
-        
-        .search-input-wrapper {
-            display: flex;
-            align-items: center;
-            flex: 1;
-            padding: 0 10px;
-            background: white;
-        }
-
-        .search-input-wrapper input { width: 100%; }
-        
-        .search-btn {
-            background: var(--primary-orange);
-            color: white;
-            border: none;
-            padding: 0 20px;
-            cursor: pointer;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .btn-list-business {
-            padding: 8px 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background: #f8f8f8;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .btn-list-business span {
-            background: var(--primary-orange);
-            color: white;
-            padding: 2px 5px;
-            border-radius: 2px;
-            font-size: 10px;
-            margin-left: 5px;
-        }
-
-        /* --- BREADCRUMBS & TITLE --- */
-        .page-header {
-            padding: 15px 0;
-        }
-        .breadcrumbs { font-size: 12px; color: var(--text-light); margin-bottom: 10px; }
-        h1 { font-size: 22px; margin-bottom: 20px; }
-
-        /* --- MAIN LAYOUT --- */
-        .main-content {
-            display: flex;
-            gap: 25px;
-            padding-bottom: 50px;
-        }
-
-        /* --- LISTINGS COLUMN (Left) --- */
-        .listings-wrapper {
-            flex: 3;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .listing-card {
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            display: flex;
-            padding: 15px;
-            gap: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-        }
-
-        .listing-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-
-        .card-image {
-            width: 220px;
-            height: 180px;
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        .since-badge {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: rgba(255,255,255,0.9);
-            text-align: center;
-            font-size: 12px;
-            padding: 5px;
-            color: var(--text-light);
-            border-bottom-left-radius: 4px;
-            border-bottom-right-radius: 4px;
-        }
-
-        .card-details {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card-title {
-            font-size: 18px;
-            color: var(--primary-blue);
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .card-location {
-            font-size: 13px;
-            color: var(--text-light);
-            margin-bottom: 8px;
-        }
-
-        .tags {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-            margin-bottom: 8px;
-        }
-
-        .tag {
-            background: #eee;
-            color: #555;
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 12px;
-            border: 1px solid #ddd;
-        }
-
-        .features {
-            font-size: 13px;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-        .features i { color: green; margin-right: 5px; }
-        
-        .open-hours { font-size: 12px; color: var(--text-light); margin-bottom: 15px; }
-
-        .card-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 15px;
-        }
-
-        .btn-group { display: flex; gap: 10px; }
-
-        .btn {
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-blue { background: var(--primary-blue); color: white; border: none; }
-        .btn-orange { background: var(--primary-orange); color: white; border: none; }
-
-        .stats { font-size: 11px; color: #888; display: flex; gap: 15px; }
-
-        /* --- SIDEBAR FORM (Right) --- */
-        .sidebar-wrapper {
-            flex: 1.2;
-        }
-
-        .lead-form {
-            background: #f0f8ff; /* Light blue tint */
-            padding: 20px;
-            border: 1px solid #b3e5fc;
-            border-radius: 8px;
-            position: sticky;
-            top: 80px; /* Sticks when scrolling */
-        }
-
-        .lead-form h3 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-        .lead-form h3 span { color: var(--primary-orange); }
-
-        .form-group { margin-bottom: 12px; position: relative; }
-        .form-group i {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #888;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px 10px 10px 35px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        textarea.form-control {
-            height: 80px;
-            resize: none;
-            padding-left: 35px;
-            padding-top: 10px;
-            top: 0;
-            transform: none;
-        }
-        .form-group textarea + i { top: 20px; transform: none; }
-
-        .btn-submit {
-            width: 100%;
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* --- RESPONSIVE MEDIA QUERIES --- */
-        @media (min-width: 769px) {
-            .search-bar-wrapper { display: flex; }
-        }
-
-        @media (max-width: 992px) {
-            .card-image { width: 180px; height: 160px; }
-        }
-
-        @media (max-width: 768px) {
-            .main-content { flex-direction: column; }
-            .search-bar-wrapper { display: none; } /* Use icons on mobile */
-            
-            .listing-card { flex-direction: column; }
-            .card-image { width: 100%; height: 200px; }
-            
-            .card-actions {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            .stats { width: 100%; justify-content: space-between; border-top: 1px solid #eee; padding-top: 10px;}
-            
-            .sidebar-wrapper { order: 2; } /* Form goes to bottom on mobile */
-            
-            .btn-list-business { display: none; } /* Save space */
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="container navbar">
-            <a href="#" class="logo"><i class="fas fa-map-marker-alt"></i><span>Deecha</span></a>
-
-            <div class="search-bar-wrapper">
-                <div class="loc-wrapper">
-                    <i class="fas fa-map-marker-alt text-light"></i>
-                    <input type="text" class="loc-input" value="Lucknow (UP)">
-                </div>
-                <div class="search-input-wrapper">
-                    <input type="text" class="main-search-input" placeholder="Search in Lucknow (UP)">
-                    <i class="fas fa-microphone text-primary-orange"></i>
-                </div>
-                <button class="search-btn"><i class="fas fa-search"></i></button>
+        <div
+          class="collapse navbar-collapse d-none d-lg-flex justify-content-end align-items-center w-100"
+        >
+          <!-- <form
+            class="d-none d-lg-flex align-items-center border rounded-pill bg-light mx-auto"
+            style="width: 100%; max-width: 600px; padding: 4px"
+          >
+            <div class="input-group border-end">
+              <span
+                class="input-group-text bg-transparent border-0 text-primary ps-3 pe-2"
+              >
+                <i class="fa-solid fa-location-dot"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control bg-transparent border-0 shadow-none fs-6"
+                placeholder="City"
+                value="Lucknow"
+                style="min-width: 100px"
+              />
             </div>
 
-            <div class="header-actions">
-                <a href="#" class="btn-list-business">List Your Business <span>Free</span></a>
-                <i class="fas fa-bars fa-lg"></i>
-                <i class="fas fa-user-circle fa-lg"></i>
+            <div class="input-group">
+              <span
+                class="input-group-text bg-transparent border-0 text-secondary ps-3 pe-2"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control bg-transparent border-0 shadow-none fs-6"
+                placeholder="Search for..."
+              />
             </div>
+
+            <button
+              class="btn btn-primary rounded-pill px-4 fw-semibold shadow-sm m-1"
+              type="button"
+              style="background-color: #e62e2e; border: none"
+            >
+              Search
+            </button>
+          </form> -->
+
+          <div class="d-flex align-items-center gap-3 ms-4">
+            <a
+              href="#"
+              class="nav-link fw-semibold text-dark d-flex align-items-center gap-1 text-nowrap"
+            >
+              <i class="fa-solid fa-plus-circle text-primary"></i> Add Business
+            </a>
+            <div class="vr text-secondary opacity-25"></div>
+            <a href="#" class="nav-link fw-medium text-dark text-nowrap"
+              >Login</a
+            >
+            <a
+              href="#"
+              class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill fw-semibold text-nowrap text-primary hover-white">Register</a>
+          </div>
         </div>
-    </header>
+      </div>
+    </nav>
 
-    <div class="container">
-        
-        <div class="page-header">
-            <div class="breadcrumbs">
-                <i class="fas fa-home"></i> &gt; Party Event Planners & Suppliers in Lucknow
-            </div>
-            <h1>Best 20 Event Management Companies in Lucknow</h1>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+      <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title fw-bold" style="color: #e62e2e">
+          <i class="fa-solid fa-headset me-2"></i>Deecha
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+        ></button>
+      </div>
+
+      <div class="offcanvas-body d-flex flex-column">
+        <ul class="navbar-nav fs-5 gap-3 mt-3">
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
+              >Services</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
+              >Categories</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
+              >Contact</a
+            >
+          </li>
+        </ul>
+
+        <div class="mt-5 d-flex flex-column gap-3 mb-4">
+          <a href="#" class="btn btn-outline-primary w-100 fw-semibold">
+            <i class="fa-solid fa-plus-circle me-2"></i>Add your business
+          </a>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-light w-50 border fw-medium">Login</a>
+            <a
+              href="#"
+              class="btn btn-primary w-50 fw-medium"
+              style="background-color: #e62e2e; border: none"
+              >Register</a
+            >
+          </div>
         </div>
-
-        <div class="main-content">
-            
-            <div class="listings-wrapper">
-
-                <div class="listing-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Greenfields">
-                        <div class="since-badge">Since 2015</div>
-                    </div>
-                    <div class="card-details">
-                        <div>
-                            <div class="card-title">Greenfields Gardens - Marriage Hall In Lucknow</div>
-                            <div class="card-location">
-                                <i class="fas fa-map-marker-alt text-primary-orange"></i> 
-                                Ranjit Singh Building Compound, Rajaji Puram, Lucknow, Uttar Pradesh - Rajajipuram...
-                            </div>
-                            <div class="tags">
-                                <span class="tag">Wedding Companies</span>
-                                <span class="tag">Artists</span>
-                            </div>
-                            <div class="features">
-                                <i class="fas fa-check"></i> Wedding Planning 
-                                <i class="fas fa-check"></i> Venue Selection 
-                                <i class="fas fa-check"></i> Wedding Hosting
-                            </div>
-                            <div class="open-hours">Open: 9:00 AM - 7:00 PM - 24x7</div>
-                        </div>
-                        
-                        <div class="card-actions">
-                            <div class="btn-group">
-                                <button class="btn btn-blue" onclick="toggleNumber(this)"><i class="fas fa-phone-alt"></i> Show Number</button>
-                                <button class="btn btn-orange"><i class="fas fa-envelope"></i> Send Enquiry</button>
-                            </div>
-                            <div class="stats">
-                                <span><i class="fas fa-eye"></i> 253 Views</span>
-                                <span><i class="fas fa-users"></i> 2 Enquiries</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="listing-card">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="JM Events">
-                        <div class="since-badge">Since 2018</div>
-                    </div>
-                    <div class="card-details">
-                        <div>
-                            <div class="card-title">JM Events And Advertisers</div>
-                            <div class="card-location">
-                                <i class="fas fa-map-marker-alt text-primary-orange"></i> 
-                                GF-2, Ansal City Centre, Hazratganj, Lucknow, Uttar Pradesh 226001
-                            </div>
-                            <div class="tags">
-                                <span class="tag">Event Mgmt</span>
-                                <span class="tag">Item Dealers</span>
-                            </div>
-                            <div class="features">
-                                <i class="fas fa-check"></i> Corporate Events 
-                                <i class="fas fa-check"></i> Wedding Planning
-                            </div>
-                            <div class="open-hours">Open: 10:00 AM - 8:00 PM</div>
-                        </div>
-                        
-                        <div class="card-actions">
-                            <div class="btn-group">
-                                <button class="btn btn-blue" onclick="toggleNumber(this)"><i class="fas fa-phone-alt"></i> Show Number</button>
-                                <button class="btn btn-orange"><i class="fas fa-envelope"></i> Send Enquiry</button>
-                            </div>
-                            <div class="stats">
-                                <span><i class="fas fa-eye"></i> 112 Views</span>
-                                <span><i class="fas fa-users"></i> 5 Enquiries</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="sidebar-wrapper">
-                <div class="lead-form">
-                    <h3>Connect with <span>Top Party Event Planners</span> in Lucknow</h3>
-                    <form>
-                        <div class="form-group">
-                            <i class="fas fa-mobile-alt"></i>
-                            <input type="text" class="form-control" placeholder="Enter your Mobile No.">
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-user"></i>
-                            <input type="text" class="form-control" placeholder="Enter your Name">
-                        </div>
-                        <div class="form-group">
-                            <i class="fas fa-comment-dots"></i>
-                            <textarea class="form-control" placeholder="What is your Requirement?"></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">Send Enquiry</button>
-                    </form>
-                </div>
-            </div>
-
-        </div>
+      </div>
     </div>
 
-    <script>
-        function toggleNumber(btn) {
-            const originalText = '<i class="fas fa-phone-alt"></i> Show Number';
-            const numberText = '<i class="fas fa-phone-alt"></i> +91 98765 43210';
+    <section class="py-4 bg-light">
+      <div class="container">
+        <nav aria-label="breadcrumb" class="mb-3">
+          <ol class="breadcrumb small text-muted">
+            <li class="breadcrumb-item">
+              <a href="index.html" class="text-decoration-none text-muted"
+                >Home</a
+              >
+            </li>
+            <!-- <li class="breadcrumb-item">
+              <a href="#" class="text-decoration-none text-muted">Lucknow</a>
+            </li> -->
+            <li
+              class="breadcrumb-item active text-primary fw-medium"
+              aria-current="page"
+            >
+              SPA Services
+            </li>
+          </ol>
+        </nav>
+
+        <h2 class="fw-bold mb-4 text-dark">
+          Popular <span class="text-primary">SPA Service</span> in Lucknow
+        </h2>
+
+        <!-- <div class="d-flex flex-wrap gap-2 mb-4">
+                <div class="dropdown">
+                    <button class="btn btn-white border shadow-sm rounded-pill px-3 fw-medium text-secondary"
+                        type="button" data-bs-toggle="dropdown">
+                        Relevance <i class="fa-solid fa-caret-down ms-1 text-primary"></i>
+                    </button>
+                    <ul class="dropdown-menu border-0 shadow">
+                        <li><a class="dropdown-item" href="#">Price: Low to High</a></li>
+                        <li><a class="dropdown-item" href="#">Price: High to Low</a></li>
+                        <li><a class="dropdown-item" href="#">Top Rated</a></li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-white border shadow-sm rounded-pill px-3 fw-medium text-secondary">
+                    Ratings <i class="fa-solid fa-caret-down ms-1 text-primary"></i>
+                </button>
+                <button class="btn btn-white border shadow-sm rounded-pill px-3 fw-medium text-secondary">Type</button>
+                <button class="btn btn-outline-primary rounded-pill px-3 fw-medium">
+                    <i class="fa-solid fa-sliders me-1"></i> All Filters
+                </button>
+            </div> -->
+
+        <div class="row">
+<div class="col-lg-8">
             
-            if (btn.innerHTML.includes('Show Number')) {
-                btn.innerHTML = numberText;
-                btn.style.backgroundColor = '#1a237e'; // Darker blue
-            } else {
-                btn.innerHTML = originalText;
-                btn.style.backgroundColor = '';
-            }
-        }
-    </script>
-</body>
+            <div class="card listing-card border-0 shadow-sm mb-4 overflow-hidden position-relative">
+              <div class="row g-0">
+                <div class="col-md-4 position-relative">
+                  <img src="https://deecha.in/admin/category/1760031563-massage-spa.webp" class="img-fluid rounded-start object-fit-cover" alt="Listing" />
+                  <span class="position-absolute top-0 start-0 bg-primary text-white small px-2 py-1 fw-bold rounded-end mt-2 z-3">
+                    <i class="fa-solid fa-crown me-1"></i> Premium
+                  </span>
+                  <div class="position-absolute bottom-0 start-0 w-100 p-2 bg-gradient-dark text-white d-flex justify-content-between small z-3">
+                    <span><i class="fa-regular fa-image me-1"></i> 12 Photos</span>
+                  </div>
+                </div>
+
+                <div class="col-md-8 p-3 d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="fw-bold mb-0 text-dark">
+                      <a href="listing-detail.html" target="_blank" class="text-decoration-none text-black stretched-link">
+                        Royal Spa Center
+                      </a>
+                    </h5>
+                    <button class="btn btn-light btn-sm rounded-circle text-primary position-relative z-3">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                  </div>
+
+                  <div class="mb-2">
+                    <span class="badge bg-success rounded-1 me-2">4.8 <i class="fa-solid fa-star small"></i></span>
+                    <span class="small text-muted fw-medium">120 Ratings</span>
+                    <span class="badge bg-light text-primary border border-primary-subtle ms-2 position-relative z-3">
+                      <i class="fa-solid fa-bolt me-1"></i>Top Search
+                    </span>
+                  </div>
+
+                  <p class="small text-muted mb-2">
+                    <i class="fa-solid fa-location-dot me-1 text-primary"></i> Gomti Nagar, Lucknow •
+                    <span class="text-success fw-medium">Open Now</span>
+                  </p>
+
+                  <div class="mb-3">
+                    <span class="badge bg-light text-secondary border fw-normal position-relative z-3">Birthday</span>
+                    <span class="badge bg-light text-secondary border fw-normal position-relative z-3">Anniversary</span>
+                    <span class="badge bg-light text-secondary border fw-normal position-relative z-3">+3 More</span>
+                  </div>
+
+                  <div class="mt-auto d-flex gap-2 position-relative z-3">
+                    <button class="btn btn-primary fw-bold flex-grow-1">
+                      <i class="fa-solid fa-phone me-2"></i> Call Now
+                    </button>
+                    <button class="btn btn-outline-success fw-bold flex-grow-1">
+                      <i class="fa-brands fa-whatsapp me-2"></i> WhatsApp
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card listing-card border-0 shadow-sm mb-4 overflow-hidden position-relative">
+              <div class="row g-0">
+                <div class="col-md-4 position-relative">
+                  <img src="https://deecha.in/admin/category/1760031563-massage-spa.webp" class="img-fluid rounded-start object-fit-cover" alt="Listing" />
+                </div>
+                <div class="col-md-8 p-3 d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="fw-bold mb-0 text-dark">
+                      <a href="listing-detail.html" target="_blank" class="text-decoration-none text-black stretched-link">
+                        Dream SPA Massage
+                      </a>
+                    </h5>
+                    <button class="btn btn-light btn-sm rounded-circle text-primary position-relative z-3">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                  </div>
+                  <div class="mb-2">
+                    <span class="badge bg-success rounded-1 me-2">4.5 <i class="fa-solid fa-star small"></i></span>
+                    <span class="small text-muted fw-medium">85 Ratings</span>
+                    <span class="badge bg-light text-primary border border-primary-subtle ms-2 position-relative z-3">
+                      <i class="fa-solid fa-check-circle me-1"></i>Verified
+                    </span>
+                  </div>
+                  <p class="small text-muted mb-2">
+                    <i class="fa-solid fa-location-dot me-1 text-primary"></i> Aliganj, Lucknow •
+                    <span class="text-primary fw-medium">Closed Now</span>
+                  </p>
+                  <div class="mb-3">
+                    <span class="badge bg-light text-secondary border fw-normal position-relative z-3">Balloon Arches</span>
+                    <span class="badge bg-light text-secondary border fw-normal position-relative z-3">Theme Decor</span>
+                  </div>
+                  <div class="mt-auto d-flex gap-2 position-relative z-3">
+                    <button class="btn btn-primary fw-bold flex-grow-1">
+                      <i class="fa-solid fa-phone me-2"></i> Call Now
+                    </button>
+                    <button class="btn btn-outline-success fw-bold flex-grow-1">
+                      <i class="fa-brands fa-whatsapp me-2"></i> WhatsApp
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card listing-card border-0 shadow-sm mb-4 overflow-hidden position-relative">
+              <div class="row g-0">
+                <div class="col-md-4 position-relative">
+                  <img src="https://deecha.in/admin/category/1760031563-massage-spa.webp" class="img-fluid rounded-start object-fit-cover" alt="Listing" />
+                </div>
+                <div class="col-md-8 p-3 d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="fw-bold mb-0 text-dark">
+                      <a href="listing-detail.html" target="_blank" class="text-decoration-none text-black stretched-link">
+                        Virza Spa Center
+                      </a>
+                    </h5>
+                    <button class="btn btn-light btn-sm rounded-circle text-primary position-relative z-3">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                  </div>
+                  <div class="mb-2">
+                    <span class="badge bg-warning text-dark rounded-1 me-2">3.9 <i class="fa-solid fa-star small"></i></span>
+                    <span class="small text-muted fw-medium">40 Ratings</span>
+                  </div>
+                  <p class="small text-muted mb-2">
+                    <i class="fa-solid fa-location-dot me-1 text-primary"></i> Hazratganj, Lucknow •
+                    <span class="text-success fw-medium">Open Now</span>
+                  </p>
+                  <div class="mb-3">
+                    <span class="badge bg-light text-secondary border fw-normal position-relative z-3">Kids Party</span>
+                    <span class="badge bg-light text-secondary border fw-normal position-relative z-3">Welcome Decor</span>
+                  </div>
+                  <div class="mt-auto d-flex gap-2 position-relative z-3">
+                    <button class="btn btn-primary fw-bold flex-grow-1">
+                      <i class="fa-solid fa-phone me-2"></i> Call Now
+                    </button>
+                    <button class="btn btn-outline-success fw-bold flex-grow-1">
+                      <i class="fa-brands fa-whatsapp me-2"></i> WhatsApp
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-4 d-none d-lg-block">
+            <div class="sticky-top" style="top: 100px; z-index: 1">
+              <div
+                class="card border-0 shadow-sm overflow-hidden mb-3 text-white text-center p-4 position-relative"
+                style="background: linear-gradient(134deg, #e62e2e, blue)"
+              >
+                <div class="card-body position-relative z-1">
+                  <h5 class="fw-bold text-white mb-1">Boost Your Business</h5>
+                  <h2 class="fw-bold text-warning mb-3">Get Leads!</h2>
+                  <button
+                    class="btn btn-light text-primary fw-bold px-4 rounded-pill shadow-sm"
+                  >
+                    Advertise Now
+                  </button>
+                </div>
+                <div
+                  class="position-absolute top-0 end-0 bg-white opacity-10 rounded-circle"
+                  style="
+                    width: 150px;
+                    height: 150px;
+                    margin-top: -86px;
+                    margin-right: -89px;
+                  "
+                ></div>
+              </div>
+
+              <div class="card border-0 shadow-sm p-3">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <h6 class="fw-bold text-muted text-uppercase small mb-0">
+                    Sponsored
+                  </h6>
+                  <span class="badge bg-light text-dark border">Ad</span>
+                </div>
+                <img
+                  src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=600&q=80"
+                  class="img-fluid rounded mb-3"
+                  alt="Ad"
+                />
+                <h6 class="fw-bold text-dark">Elite SPA Massage</h6>
+                <p class="small text-muted mb-2">
+                  Take Smooth And Relax MAssage service in Affordable Price.
+                </p>
+                <button class="btn btn-outline-dark btn-sm w-100 fw-medium">
+                  View Profile
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="side-sticky-tabs d-none d-lg-flex flex-column gap-1">
+      <a href="#" class="tab-btn shadow bg-primary text-white"> Advertise </a>
+      <a href="#" class="tab-btn shadow bg-dark text-white"> Free Listing </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
