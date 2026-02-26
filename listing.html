@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -16,26 +17,24 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    
-    <title>Listing Page</title>
 
+    <title>Listing Page</title>
     <meta name="robots" content="noindex" />
   </head>
 
   <body class="bg-light">
     <nav
-      class="navbar navbar-expand-lg bg-white sticky-top py-3 shadow-sm"
-      style="z-index: 1020"
+      class="navbar navbar-expand-lg bg-white sticky-top py-2 shadow-sm"
+      style="z-index: 1040"
     >
-      <div class="container">
+      <div class="container-fluid container-lg">
         <a
-          class="navbar-brand fw-bold d-flex align-items-center gap-2 me-4 text-primary"
+          class="navbar-brand fw-bold d-flex align-items-center gap-2 me-4"
           href="index.html"
-          style="font-size: 1.5rem;"
+          style="font-size: 1.5rem; color: blue !important"
         >
-          <i class="fa-solid fa-headset"></i> Deecha
+          <i class="fa-solid fa-champagne-glasses"></i> Deecha
         </a>
-
         <button
           class="navbar-toggler border-0 shadow-none"
           type="button"
@@ -46,72 +45,135 @@
         </button>
 
         <div
-          class="collapse navbar-collapse d-none d-lg-flex justify-content-end align-items-center w-100"
+          class="collapse navbar-collapse d-none d-lg-flex justify-content-between align-items-center w-100"
         >
-          <!-- <form
-            class="d-none d-lg-flex align-items-center border rounded-pill bg-light mx-auto"
-            style="width: 100%; max-width: 600px; padding: 4px"
+          <div
+            class="mx-auto d-flex align-items-center bg-white rounded-pill px-2 py-1 desktop-search-bar"
+            style="width: 100%; max-width: 550px"
           >
-            <div class="input-group border-end">
-              <span
-                class="input-group-text bg-transparent border-0 text-primary ps-3 pe-2"
+            <div class="dropdown border-end pe-2 me-2">
+              <button
+                class="btn btn-sm border-0 dropdown-toggle fw-semibold text-dark d-flex align-items-center gap-2"
+                type="button"
+                data-bs-toggle="dropdown"
               >
-                <i class="fa-solid fa-location-dot"></i>
-              </span>
+                <i class="fa-solid fa-location-dot text-primary"></i>
+                <span id="desktopNavCity">Lucknow</span>
+              </button>
+              <ul class="dropdown-menu border-0 shadow mt-2">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="updateCity('Lucknow')"
+                    >Lucknow</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="updateCity('Kanpur')"
+                    >Kanpur</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="input-group border-0">
               <input
                 type="text"
-                class="form-control bg-transparent border-0 shadow-none fs-6"
-                placeholder="City"
-                value="Lucknow"
-                style="min-width: 100px"
+                class="form-control border-0 bg-transparent shadow-none"
+                placeholder="Search decorators, venues..."
               />
-            </div>
-
-            <div class="input-group">
-              <span
-                class="input-group-text bg-transparent border-0 text-secondary ps-3 pe-2"
+              <button
+                class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center p-2"
+                style="width: 35px; height: 35px; background-color: blue"
               >
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </span>
-              <input
-                type="text"
-                class="form-control bg-transparent border-0 shadow-none fs-6"
-                placeholder="Search for..."
-              />
+                <i class="fa-solid fa-magnifying-glass text-white small"></i>
+              </button>
             </div>
-
-            <button
-              class="btn btn-primary rounded-pill px-4 fw-semibold shadow-sm m-1"
-              type="button"
-              style="background-color: #e62e2e; border: none"
-            >
-              Search
-            </button>
-          </form> -->
-
+          </div>
           <div class="d-flex align-items-center gap-3 ms-4">
+            <a href="add-business.html" class="nav-link fw-semibold text-dark text-nowrap"
+              ><i class="fa-solid fa-plus-circle text-primary"></i> Add
+              Business</a
+            >
+            <div class="vr text-secondary opacity-25"></div>
             <a
               href="#"
-              class="nav-link fw-semibold text-dark d-flex align-items-center gap-1 text-nowrap"
-            >
-              <i class="fa-solid fa-plus-circle text-primary"></i> Add Business
-            </a>
-            <div class="vr text-secondary opacity-25"></div>
-            <a href="#" class="nav-link fw-medium text-dark text-nowrap"
+              class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill fw-semibold text-nowrap"
+              style="border-color: blue; color: blue"
               >Login</a
             >
-            <a
-              href="#"
-              class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill fw-semibold text-nowrap text-primary hover-white">Register</a>
           </div>
         </div>
       </div>
     </nav>
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+    <div
+      class="d-lg-none position-fixed start-0 end-0 bg-white border-bottom shadow-sm px-3 py-2"
+      style="top: 70px; z-index: 1030"
+    >
+      <div class="d-flex gap-2 align-items-center">
+        <div class="dropdown flex-shrink-0">
+          <button
+            class="btn btn-outline-primary rounded-pill btn-sm fw-bold d-flex align-items-center gap-1"
+            type="button"
+            data-bs-toggle="dropdown"
+            style="border-color: blue; color: blue; padding: 6px 12px"
+          >
+            <i class="fa-solid fa-location-dot"></i>
+            <span id="mobileSelectedCity">Lucknow</span>
+            <i class="fa-solid fa-caret-down ms-1 small"></i>
+          </button>
+          <ul
+            class="dropdown-menu shadow border-0 mt-1"
+            style="border-radius: 10px"
+          >
+            <li>
+              <a
+                class="dropdown-item small"
+                href="#"
+                onclick="updateCity('Lucknow')"
+                >Lucknow</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item small"
+                href="#"
+                onclick="updateCity('Kanpur')"
+                >Kanpur</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="flex-grow-1">
+          <div class="input-group">
+            <span
+              class="input-group-text bg-light border-end-0 rounded-start-pill ps-3 text-secondary"
+              ><i class="fa-solid fa-magnifying-glass"></i
+            ></span>
+            <input
+              type="text"
+              class="form-control bg-light border-start-0 rounded-end-pill shadow-none small"
+              placeholder="Search..."
+              style="font-size: 0.9rem"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="offcanvas offcanvas-start"
+      tabindex="-1"
+      id="mobileMenu"
+      style="z-index: 1050"
+    >
       <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title fw-bold" style="color: #e62e2e">
-          <i class="fa-solid fa-headset me-2"></i>Deecha
+        <h5 class="offcanvas-title fw-bold" style="color: blue">
+          Deecha
         </h5>
         <button
           type="button"
@@ -119,94 +181,272 @@
           data-bs-dismiss="offcanvas"
         ></button>
       </div>
-
       <div class="offcanvas-body d-flex flex-column">
         <ul class="navbar-nav fs-5 gap-3 mt-3">
           <li class="nav-item">
-            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
-              >Home</a
-            >
+            <a class="nav-link text-dark border-bottom pb-2" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
+            <a class="nav-link text-dark border-bottom pb-2" href="#"
               >Services</a
             >
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
-              >Categories</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
-              >Contact</a
-            >
-          </li>
         </ul>
-
-        <div class="mt-5 d-flex flex-column gap-3 mb-4">
-          <a href="#" class="btn btn-outline-primary w-100 fw-semibold">
-            <i class="fa-solid fa-plus-circle me-2"></i>Add your business
-          </a>
-          <div class="d-flex gap-2">
-            <a href="#" class="btn btn-light w-50 border fw-medium">Login</a>
-            <a
-              href="#"
-              class="btn btn-primary w-50 fw-medium"
-              style="background-color: #e62e2e; border: none"
-              >Register</a
-            >
-          </div>
-        </div>
       </div>
     </div>
 
-    <section class="py-4 bg-light">
-      <div class="container">
-        <nav aria-label="breadcrumb" class="mb-3">
+    <section class="py-4 bg-light mt-5 mt-lg-0">
+      <div class="container-fluid container-lg">
+        <nav aria-label="breadcrumb" class="mb-2">
           <ol class="breadcrumb small text-muted">
             <li class="breadcrumb-item">
               <a href="index.html" class="text-decoration-none text-muted"
                 >Home</a
               >
             </li>
-            <!-- <li class="breadcrumb-item">
+            <li class="breadcrumb-item">
               <a href="#" class="text-decoration-none text-muted">Lucknow</a>
-            </li> -->
-            <li
-              class="breadcrumb-item active text-primary fw-medium"
-              aria-current="page"
-            >
-              SPA Services
+            </li>
+            <li class="breadcrumb-item active text-primary fw-medium">
+              Decorators
             </li>
           </ol>
         </nav>
-
-        <h2 class="fw-bold mb-4 text-dark">
-          Popular <span class="text-primary">SPA Service</span> in Lucknow
+        <h2 class="fw-bold mb-3 text-dark">
+          Popular <span class="text-primary">Balloon Decorators</span> in Lucknow
         </h2>
 
-        <!-- <div class="d-flex flex-wrap gap-2 mb-4">
-                <div class="dropdown">
-                    <button class="btn btn-white border shadow-sm rounded-pill px-3 fw-medium text-secondary"
-                        type="button" data-bs-toggle="dropdown">
-                        Relevance <i class="fa-solid fa-caret-down ms-1 text-primary"></i>
-                    </button>
-                    <ul class="dropdown-menu border-0 shadow">
-                        <li><a class="dropdown-item" href="#">Price: Low to High</a></li>
-                        <li><a class="dropdown-item" href="#">Price: High to Low</a></li>
-                        <li><a class="dropdown-item" href="#">Top Rated</a></li>
-                    </ul>
+        <div
+          class="sticky-filter-bar sticky-top bg-light py-2 mb-4"
+          style="
+            z-index: 1020;
+            margin-left: -10px;
+            margin-right: -10px;
+            padding-left: 10px;
+            padding-right: 10px;
+          "
+        >
+          <div class="filter-scroll-container">
+            <div class="dropdown">
+              <button
+                class="btn filter-pill dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                id="btnLocality"
+              >
+                Locality
+              </button>
+              <div
+                class="dropdown-menu p-2 shadow border-0 custom-dropdown-menu"
+                style="min-width: 240px"
+              >
+                <div class="input-group mb-2 border rounded-1 bg-light">
+                  <input
+                    type="text"
+                    class="form-control border-0 shadow-none bg-transparent ps-2 dropdown-search"
+                    placeholder="Search locality..."
+                  />
                 </div>
+                <div class="list-options custom-scrollbar">
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnLocality')"
+                    >Gomti Nagar</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnLocality')"
+                    >Hazratganj</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnLocality')"
+                    >Aliganj</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnLocality')"
+                    >Indira Nagar</a
+                  >
+                </div>
+              </div>
+            </div>
 
-                <button class="btn btn-white border shadow-sm rounded-pill px-3 fw-medium text-secondary">
-                    Ratings <i class="fa-solid fa-caret-down ms-1 text-primary"></i>
-                </button>
-                <button class="btn btn-white border shadow-sm rounded-pill px-3 fw-medium text-secondary">Type</button>
-                <button class="btn btn-outline-primary rounded-pill px-3 fw-medium">
-                    <i class="fa-solid fa-sliders me-1"></i> All Filters
-                </button>
-            </div> -->
+            <div class="dropdown">
+              <button
+                class="btn filter-pill dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                id="btnRating"
+              >
+                Rating
+              </button>
+              <div
+                class="dropdown-menu p-2 shadow border-0 custom-dropdown-menu"
+                style="min-width: 200px"
+              >
+                <div class="list-options">
+                  <a
+                    class="option-link d-flex justify-content-between align-items-center"
+                    href="#"
+                    onclick="selectFilter(this, 'btnRating')"
+                  >
+                    <span>4.5 & up</span>
+                    <span class="text-warning small"
+                      ><i class="fa-solid fa-star"></i> 4.5+</span
+                    >
+                  </a>
+                  <a
+                    class="option-link d-flex justify-content-between align-items-center"
+                    href="#"
+                    onclick="selectFilter(this, 'btnRating')"
+                  >
+                    <span>4.0 & up</span>
+                    <span class="text-warning small"
+                      ><i class="fa-solid fa-star"></i> 4.0+</span
+                    >
+                  </a>
+                  <a
+                    class="option-link d-flex justify-content-between align-items-center"
+                    href="#"
+                    onclick="selectFilter(this, 'btnRating')"
+                  >
+                    <span>Any Rating</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button
+                class="btn filter-pill dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                id="btnCategory"
+              >
+                Category
+              </button>
+              <div
+                class="dropdown-menu p-2 shadow border-0 custom-dropdown-menu"
+              >
+                <div class="input-group mb-2 border rounded-1 bg-light">
+                  <input
+                    type="text"
+                    class="form-control border-0 shadow-none bg-transparent ps-2 dropdown-search"
+                    placeholder="Search..."
+                  />
+                </div>
+                <div class="list-options custom-scrollbar">
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnCategory')"
+                    >Wedding</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnCategory')"
+                    >Birthday Party</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnCategory')"
+                    >Corporate</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button
+                class="btn filter-pill dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                id="btnSubCat"
+              >
+                Sub-Category
+              </button>
+              <div
+                class="dropdown-menu p-2 shadow border-0 custom-dropdown-menu"
+              >
+                <div class="list-options custom-scrollbar">
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnSubCat')"
+                    >Balloon Decor</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnSubCat')"
+                    >Flower Decor</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnSubCat')"
+                    >Catering</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button
+                class="btn filter-pill dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                id="btnSort"
+              >
+                <i class="fa-solid fa-arrow-down-wide-short small me-1"></i>
+                Sort
+              </button>
+              <div
+                class="dropdown-menu p-2 shadow border-0 custom-dropdown-menu"
+              >
+                <div class="list-options">
+                  <a
+                    class="option-link active"
+                    href="#"
+                    onclick="selectFilter(this, 'btnSort')"
+                    >Recommended</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnSort')"
+                    >Top Rated</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnSort')"
+                    >Price: Low to High</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <a
+              href="#"
+              class="text-primary fw-bold text-decoration-none ms-2 small text-nowrap"
+              onclick="location.reload()"
+              >Clear All</a
+            >
+          </div>
+        </div>
 
         <div class="row">
 <div class="col-lg-8">
@@ -226,7 +466,7 @@
                 <div class="col-md-8 p-3 d-flex flex-column">
                   <div class="d-flex justify-content-between align-items-start mb-2">
                     <h5 class="fw-bold mb-0 text-dark">
-                      <a href="listing-detail.html" target="_blank" class="text-decoration-none text-black stretched-link">
+                      <a href="listing-detail.html"  class="text-decoration-none text-black stretched-link">
                         Royal Spa Center
                       </a>
                     </h5>
@@ -274,8 +514,50 @@
                 <div class="col-md-8 p-3 d-flex flex-column">
                   <div class="d-flex justify-content-between align-items-start mb-2">
                     <h5 class="fw-bold mb-0 text-dark">
-                      <a href="listing-detail.html" target="_blank" class="text-decoration-none text-black stretched-link">
+                      <a href="listing-detail.html"  class="text-decoration-none text-black stretched-link">
                         Dream SPA Massage
+                      </a>
+                    </h5>
+                    <button class="btn btn-light btn-sm rounded-circle text-primary position-relative z-3">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                  </div>
+                  <div class="mb-2">
+                    <span class="badge bg-success rounded-1 me-2">4.5 <i class="fa-solid fa-star small"></i></span>
+                    <span class="small text-muted fw-medium">85 Ratings</span>
+                    <span class="badge bg-light text-primary border border-primary-subtle ms-2 position-relative z-3">
+                      <i class="fa-solid fa-check-circle me-1"></i>Verified
+                    </span>
+                  </div>
+                  <p class="small text-muted mb-2">
+                    <i class="fa-solid fa-location-dot me-1 text-primary"></i> Aliganj, Lucknow •
+                    <span class="text-primary fw-medium">Closed Now</span>
+                  </p>
+                  <div class="mb-3">
+                    <span class="badge bg-light text-secondary border fw-normal position-relative z-3">Balloon Arches</span>
+                    <span class="badge bg-light text-secondary border fw-normal position-relative z-3">Theme Decor</span>
+                  </div>
+                  <div class="mt-auto d-flex gap-2 position-relative z-3">
+                    <button class="btn btn-primary fw-bold flex-grow-1">
+                      <i class="fa-solid fa-phone me-2"></i> Call Now
+                    </button>
+                    <button class="btn btn-outline-success fw-bold flex-grow-1">
+                      <i class="fa-brands fa-whatsapp me-2"></i> WhatsApp
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card listing-card border-0 shadow-sm mb-4 overflow-hidden position-relative">
+              <div class="row g-0">
+                <div class="col-md-4 position-relative">
+                  <img src="https://deecha.in/admin/category/1760031563-massage-spa.webp" class="img-fluid rounded-start object-fit-cover" alt="Listing" />
+                </div>
+                <div class="col-md-8 p-3 d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="fw-bold mb-0 text-dark">
+                      <a href="listing-detail.html"  class="text-decoration-none text-black stretched-link">
+                        Manorama SPA Massage
                       </a>
                     </h5>
                     <button class="btn btn-light btn-sm rounded-circle text-primary position-relative z-3">
@@ -317,7 +599,7 @@
                 <div class="col-md-8 p-3 d-flex flex-column">
                   <div class="d-flex justify-content-between align-items-start mb-2">
                     <h5 class="fw-bold mb-0 text-dark">
-                      <a href="listing-detail.html" target="_blank" class="text-decoration-none text-black stretched-link">
+                      <a href="listing-detail.html"  class="text-decoration-none text-black stretched-link">
                         Virza Spa Center
                       </a>
                     </h5>
@@ -355,7 +637,7 @@
             <div class="sticky-top" style="top: 100px; z-index: 1">
               <div
                 class="card border-0 shadow-sm overflow-hidden mb-3 text-white text-center p-4 position-relative"
-                style="background: linear-gradient(134deg, #e62e2e, blue)"
+                style="background: linear-gradient(134deg, blue, blue)"
               >
                 <div class="card-body position-relative z-1">
                   <h5 class="fw-bold text-white mb-1">Boost Your Business</h5>
@@ -405,11 +687,97 @@
       </div>
     </section>
 
-    <div class="side-sticky-tabs d-none d-lg-flex flex-column gap-1">
-      <a href="#" class="tab-btn shadow bg-primary text-white"> Advertise </a>
-      <a href="#" class="tab-btn shadow bg-dark text-white"> Free Listing </a>
+      <footer class="pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <a class="navbar-brand fw-bold fs-3 text-white d-block mb-3" href="#">
+            <i class="fa-solid fa-champagne-glasses text-white"></i> <span class="text-white">Deecha</span>
+          </a>
+          <p class="small">
+            We are a team of passionate event planners dedicated to creating
+            unique and memorable experiences for every client.
+          </p>
+          <div class="mt-4">
+            <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h5>Categories</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="#">Weddings</a></li>
+            <li><a href="#">Corporate</a></li>
+            <li><a href="#">Birthdays</a></li>
+            <li><a href="#">Decorations</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <h5>Newsletter</h5>
+          <p class="small">Subscribe to get the latest updates and offers.</p>
+          <form class="input-group mt-3">
+            <input type="email" class="form-control" placeholder="Enter your email" />
+            <button class="btn btn-primary" type="button" style="background-color: blue; border: none">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <hr class="my-4 border-secondary" />
+
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0 small">
+            &copy; 2023 Deecha. All rights reserved.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#" class="small text-decoration-none text-muted me-3">Privacy Policy</a>
+          <a href="#" class="small text-decoration-none text-muted">Terms of Service</a>
+        </div>
+      </div>
     </div>
+  </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function selectFilter(element, btnId) {
+        // 1. Button ka text aur style badlo
+        let text = element.querySelector("span:first-child")
+          ? element.querySelector("span:first-child").innerText
+          : element.innerText;
+        let btn = document.getElementById(btnId);
+        btn.innerText = text;
+        btn.classList.add("active-filter");
+
+        // 2. List mein se purana active hatao aur naya lagao
+        let parentDiv = element.closest(".list-options");
+        parentDiv
+          .querySelectorAll(".option-link")
+          .forEach((el) => el.classList.remove("active"));
+        element.classList.add("active");
+
+        // 3. DROPDOWN HIDE FIX: Yeh line menu ko band kar degi
+        const dropdownToggle = btn;
+        const dropdownInstance =
+          bootstrap.Dropdown.getOrCreateInstance(dropdownToggle);
+        dropdownInstance.hide();
+      }
+    </script>
   </body>
 </html>
