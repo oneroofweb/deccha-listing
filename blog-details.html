@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blogs | Digital Bhaiya</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-white sticky-top py-2 shadow-sm" style="z-index: 1040">
+    <div class="container-fluid container-lg">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2 me-4" href="index.html"
+        style="font-size: 1.5rem; color: blue !important">
+        <i class="fa-solid fa-champagne-glasses"></i> Deecha
+      </a>
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#mobileMenu">
+        <span class="fa-solid fa-bars-staggered fa-lg text-dark"></span>
+      </button>
+
+      <div class="collapse navbar-collapse d-none d-lg-flex justify-content-between align-items-center w-100">
+        <div class="mx-auto d-flex align-items-center bg-white rounded-pill px-2 py-1 desktop-search-bar border shadow-sm"
+          style="width: 100%; max-width: 550px">
+          
+          <div class="dropdown border-end pe-2 me-2">
+            <button class="btn btn-sm border-0 dropdown-toggle fw-semibold text-dark d-flex align-items-center gap-2"
+              type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+              <i class="fa-solid fa-location-dot text-primary" style="color: blue !important;"></i>
+              <span id="desktopNavCity">Lucknow</span>
+            </button>
+            
+            <ul class="dropdown-menu border-0 shadow mt-2 p-0 rounded-3" style="width: 250px; overflow: hidden;">
+              <div class="p-2 border-bottom bg-light sticky-top">
+                <input type="text" class="form-control form-control-sm shadow-none border-0 rounded-pill px-3" 
+                       id="desktopCitySearch" placeholder="Search city..." onkeyup="filterCity('desktop')">
+              </div>
+              <div class="city-scroll-list" id="desktopCityList" style="max-height: 250px; overflow-y: auto;">
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Lucknow')">Lucknow</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Kanpur')">Kanpur</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Delhi')">Delhi</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Mumbai')">Mumbai</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Noida')">Noida</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Agra')">Agra</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Varanasi')">Varanasi</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Pune')">Pune</a></li>
+              </div>
+            </ul>
+          </div>
+
+          <div class="input-group border-0">
+            <input type="text" class="form-control border-0 bg-transparent shadow-none"
+              placeholder="Search decorators, venues..." />
+            <button class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center p-2"
+              style="width: 35px; height: 35px; background-color: blue; border:none;">
+              <i class="fa-solid fa-magnifying-glass text-white small"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-3 ms-4">
+          <a href="add-business.html" class="nav-link fw-semibold text-dark text-nowrap"><i
+              class="fa-solid fa-plus-circle" style="color: blue;"></i> Add Business</a>
+          <div class="vr text-secondary opacity-25"></div>
+          <a href="#" class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill fw-semibold text-nowrap"
+            style="border-color: blue; color: blue">Login</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="d-lg-none position-fixed start-0 end-0 bg-white border-bottom shadow-sm px-3 py-2" style="top: 55px; z-index: 1030">
+    <div class="d-flex gap-2 align-items-center">
+      
+      <div class="dropdown flex-shrink-0">
+        <button class="btn btn-outline-primary rounded-pill btn-sm fw-bold d-flex align-items-center gap-1" type="button"
+          data-bs-toggle="dropdown" data-bs-auto-close="outside" style="border-color: blue; color: blue; padding: 6px 12px">
+          <i class="fa-solid fa-location-dot"></i>
+          <span id="mobileSelectedCity">Lucknow</span>
+          <i class="fa-solid fa-caret-down ms-1 small"></i>
+        </button>
+
+        <ul class="dropdown-menu shadow border-0 mt-2 p-0 rounded-3" style="width: 220px; overflow: hidden;">
+          <div class="p-2 border-bottom bg-light sticky-top">
+            <input type="text" class="form-control form-control-sm shadow-none border-0 rounded-pill px-3" 
+                   id="mobileCitySearch" placeholder="Search city..." onkeyup="filterCity('mobile')">
+          </div>
+          <div class="city-scroll-list" id="mobileCityList" style="max-height: 200px; overflow-y: auto;">
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Lucknow')">Lucknow</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Kanpur')">Kanpur</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Delhi')">Delhi</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Mumbai')">Mumbai</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Noida')">Noida</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Agra')">Agra</a></li>
+          </div>
+        </ul>
+      </div>
+
+      <div class="flex-grow-1">
+        <div class="input-group border rounded-pill overflow-hidden">
+          <span class="input-group-text bg-light border-0 text-secondary ps-3"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" class="form-control bg-light border-0 shadow-none small py-2" placeholder="Search..." style="font-size: 0.9rem" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ==================== Navbar END =================== -->
+
+  <section id="blog-detail" class="py-5 bg-light">
+        <div class="container py-4">
+            
+            <div class="row g-5">
+                
+                <div class="col-lg-8">
+                    
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb small bg-transparent p-0">
+                            <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none text-secondary">Home</a></li>
+                            <li class="breadcrumb-item"><a href="blog.html" class="text-decoration-none text-secondary">Blog</a></li>
+                            <li class="breadcrumb-item active text-primary fw-bold" aria-current="page">SEO Guide</li>
+                        </ol>
+                    </nav>
+
+                    <div class="mb-4">
+                        <span class="badge bg-primary-soft text-primary px-3 py-2 rounded-pill fw-bold mb-3">
+                            <i class="fas fa-bullhorn me-1"></i> Digital Marketing
+                        </span>
+
+                        <h1 class="display-5 fw-bold text-dark mb-4" style="line-height: 1.3;">
+                            The Ultimate Guide to Ranking #1 on Google in 2025
+                        </h1>
+
+                        <div class="d-flex align-items-center border-bottom border-light-subtle pb-4 mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Verma" class="rounded-circle me-3 border border-2 border-white shadow-sm" style="width: 55px; height: 55px; object-fit: cover;">
+                            
+                            <div class="flex-grow-1">
+                                <h6 class="fw-bold text-dark mb-0">Rahul Verma</h6>
+                                <div class="text-secondary small">
+                                    <span class="me-3"><i class="far fa-calendar-alt me-1 text-primary"></i> 12 Dec 25</span>
+                                    <span><i class="far fa-clock me-1 text-primary"></i> 5 Min Read</span>
+                                </div>
+                            </div>
+
+                            <div class="d-none d-md-flex gap-2">
+                                <a href="#" class="btn btn-light btn-sm rounded-circle text-primary"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="btn btn-light btn-sm rounded-circle text-success"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#" class="btn btn-light btn-sm rounded-circle text-info"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <div class="rounded-4 overflow-hidden shadow-sm position-relative">
+                            <img src="images/deccha-cat2.webp" alt="SEO Analysis" class="w-100 h-100 object-fit-cover" style="min-height: 400px;">
+                        </div>
+                        <p class="text-center text-muted small mt-2 fst-italic">Figure 1: SEO Analytics Dashboard</p>
+                    </div>
+
+                    <div class="blog-content bg-white p-4 p-lg-5 rounded-4 shadow-sm text-secondary">
+                        <p class="lead text-dark fw-medium mb-4">
+                            Search Engine Optimization (SEO) is constantly evolving. What worked in 2023 might get you penalized in 2025. In this comprehensive guide, we break down exactly what you need to do.
+                        </p>
+                        
+                        <p class="mb-4">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+
+                        <h3 class="fw-bold text-dark mt-5 mb-3">1. Why Content is Still King</h3>
+                        <p class="mb-4">
+                            Google's latest core update emphasizes "Helpful Content." This means your blogs shouldn't just be written for robots; they must solve real problems for real people.
+                        </p>
+
+                        <blockquote class="bg-light border-start border-4 border-primary p-4 rounded-end my-5">
+                            <p class="mb-0 text-dark fst-italic fw-medium">"The best place to hide a dead body is the second page of Google search results."</p>
+                        </blockquote>
+
+                        <h3 class="fw-bold text-dark mt-5 mb-3">2. Mobile First Indexing</h3>
+                        <p>
+                            Most users in Lucknow and India browse on mobile. If your site isn't responsive, you are losing 70% of your traffic instantly.
+                        </p>
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="sticky-top" style="top: 120px; z-index: 1;">
+                        
+                        <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                            <h5 class="fw-bold mb-3">Search</h5>
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0" placeholder="Search...">
+                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="card bg-primary text-white border-0 shadow-sm rounded-4 p-4 text-center">
+                            <h4 class="fw-bold text-white">Need SEO Help?</h4>
+                            <p class="small text-white-50">Book a free consultation call with Rahul Verma today.</p>
+                            <a href="#contact" class="btn btn-light text-primary fw-bold rounded-pill w-100">Book Now</a>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- ============ Comment Section ============== -->
+     <section id="comments-section" class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-8">
+
+                <div class="mb-5">
+                    <h3 class="fw-bold text-dark mb-4">
+                        <i class="far fa-comments text-primary me-2"></i>3 Comments
+                    </h3>
+
+                    <div class="d-flex mb-4">
+                        <div class="flex-shrink-0">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="rounded-circle border border-2 border-white shadow-sm" style="width: 60px; height: 60px; object-fit: cover;">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="bg-white p-4 rounded-4 shadow-sm">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="fw-bold mb-0 text-dark">Priya Sharma</h6>
+                                        <small class="text-muted" style="font-size: 0.8rem;">Dec 15, 2025 at 10:30 AM</small>
+                                    </div>
+                                    <a href="#reply-form" class="btn btn-sm btn-light text-primary fw-bold rounded-pill px-3"><i class="fas fa-reply me-1"></i> Reply</a>
+                                </div>
+                                <p class="text-secondary mb-0">
+                                    This guide is super helpful! I didn't realize how important "Mobile First Indexing" was for local Lucknow businesses. Definitely updating my website today.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-4 ms-md-5 ps-md-4 border-start border-3 border-primary-subtle">
+                        <div class="flex-shrink-0">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin" class="rounded-circle border border-2 border-primary shadow-sm" style="width: 60px; height: 60px; object-fit: cover;">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="bg-light p-4 rounded-4 border border-light-subtle">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="fw-bold mb-0 text-primary">Rahul Verma <span class="badge bg-primary text-white ms-1" style="font-size: 0.65rem; vertical-align: middle;">AUTHOR</span></h6>
+                                        <small class="text-muted" style="font-size: 0.8rem;">Dec 15, 2025 at 11:00 AM</small>
+                                    </div>
+                                </div>
+                                <p class="text-dark mb-0">
+                                    Thanks, Priya! Yes, Google prioritizes mobile sites now. Let me know if you need any help auditing your current layout.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-4">
+                        <div class="flex-shrink-0">
+                            <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="User" class="rounded-circle border border-2 border-white shadow-sm" style="width: 60px; height: 60px; object-fit: cover;">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="bg-white p-4 rounded-4 shadow-sm">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="fw-bold mb-0 text-dark">Amit Singh</h6>
+                                        <small class="text-muted" style="font-size: 0.8rem;">Dec 16, 2025 at 09:15 AM</small>
+                                    </div>
+                                    <a href="#reply-form" class="btn btn-sm btn-light text-primary fw-bold rounded-pill px-3"><i class="fas fa-reply me-1"></i> Reply</a>
+                                </div>
+                                <p class="text-secondary mb-0">
+                                    Great insights on content strategy. Do you have any packages specifically for SEO in Noida region?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reply-form" class="bg-white p-4 p-lg-5 rounded-4 shadow-sm border border-light-subtle">
+                    <h4 class="fw-bold mb-2">Leave a Reply</h4>
+                    <p class="text-muted small mb-4">Your email address will not be published. Required fields are marked *</p>
+
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control bg-light border-0" id="floatingName" placeholder="Your Name">
+                                    <label for="floatingName" class="text-secondary">Full Name *</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control bg-light border-0" id="floatingEmail" placeholder="name@example.com">
+                                    <label for="floatingEmail" class="text-secondary">Email Address *</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="url" class="form-control bg-light border-0" id="floatingWebsite" placeholder="https://">
+                                    <label for="floatingWebsite" class="text-secondary">Website (Optional)</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control bg-light border-0" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px"></textarea>
+                                    <label for="floatingTextarea" class="text-secondary">Write your comment here... *</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label text-muted small" for="flexCheckDefault">
+                                        Save my name, email, and website in this browser for the next time I comment.
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow hover-effect">
+                                    Post Comment <i class="fas fa-paper-plane ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+ <footer class="pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <a class="navbar-brand fw-bold fs-3 text-white d-block mb-3" href="#">
+            <i class="fa-solid fa-champagne-glasses text-white"></i> <span class="text-white">Deecha</span>
+          </a>
+          <p class="small">
+            We are a team of passionate event planners dedicated to creating
+            unique and memorable experiences for every client.
+          </p>
+          <div class="mt-4">
+            <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Services</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h5>Categories</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2">
+            <li><a href="#">Weddings</a></li>
+            <li><a href="#">Corporate</a></li>
+            <li><a href="#">Birthdays</a></li>
+            <li><a href="#">Decorations</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <h5>Newsletter</h5>
+          <p class="small">Subscribe to get the latest updates and offers.</p>
+          <form class="input-group mt-3">
+            <input type="email" class="form-control" placeholder="Enter your email" />
+            <button class="btn btn-primary" type="button" style="background-color: blue; border: none">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <hr class="my-4 border-secondary" />
+
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0 small">
+            &copy; 2023 Deecha. All rights reserved.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#" class="small text-decoration-none text-muted me-3">Privacy Policy</a>
+          <a href="#" class="small text-decoration-none text-muted">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.querySelectorAll('.loadMoreTabBtn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Find the target container for this button
+                const targetId = this.getAttribute('data-target');
+                const container = document.getElementById(targetId);
+                
+                if (container) {
+                    // Find all hidden cards within this specific tab
+                    const hiddenCards = container.querySelectorAll('.blog-hidden.d-none');
+                    
+                    // Show them
+                    hiddenCards.forEach(card => {
+                        card.classList.remove('d-none');
+                    });
+                    
+                    // Hide the button after loading all
+                    this.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    <script src="/script.js"></script>
+</body>
+</html>

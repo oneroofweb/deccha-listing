@@ -26,264 +26,103 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg bg-white sticky-top py-3 shadow-sm"
-      style="z-index: 1020"
-    >
-      <div class="container">
-        <a
-          class="navbar-brand fw-bold d-flex align-items-center gap-2 me-4"
-          href="#"
-          style="font-size: 1.5rem; color: #e62e2e !important"
-        >
-          <i class="fa-solid fa-champagne-glasses"></i> Event Bucket
-        </a>
+<nav class="navbar navbar-expand-lg bg-white sticky-top py-2 shadow-sm" style="z-index: 1040">
+    <div class="container-fluid container-lg">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2 me-4" href="index.html"
+        style="font-size: 1.5rem; color: blue !important">
+        <i class="fa-solid fa-champagne-glasses"></i> Deecha
+      </a>
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#mobileMenu">
+        <span class="fa-solid fa-bars-staggered fa-lg text-dark"></span>
+      </button>
 
-        <button
-          class="navbar-toggler border-0 shadow-none"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#mobileMenu"
-        >
-          <span class="fa-solid fa-bars-staggered fa-lg text-dark"></span>
-        </button>
-
-        <div
-          class="collapse navbar-collapse d-none d-lg-flex justify-content-end align-items-center w-100"
-        >
-          <!-- <form
-            class="d-none d-lg-flex align-items-center border rounded-pill bg-light mx-auto"
-            style="width: 100%; max-width: 600px; padding: 4px"
-          >
-            <div class="input-group border-end">
-              <span
-                class="input-group-text bg-transparent border-0 text-danger ps-3 pe-2"
-              >
-                <i class="fa-solid fa-location-dot"></i>
-              </span>
-              <input
-                type="text"
-                class="form-control bg-transparent border-0 shadow-none fs-6"
-                placeholder="City"
-                value="Lucknow"
-                style="min-width: 100px"
-              />
-            </div>
-
-            <div class="input-group">
-              <span
-                class="input-group-text bg-transparent border-0 text-secondary ps-3 pe-2"
-              >
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </span>
-              <input
-                type="text"
-                class="form-control bg-transparent border-0 shadow-none fs-6"
-                placeholder="Search for..."
-              />
-            </div>
-
-            <button
-              class="btn btn-danger rounded-pill px-4 fw-semibold shadow-sm m-1"
-              type="button"
-              style="background-color: #e62e2e; border: none"
-            >
-              Search
+      <div class="collapse navbar-collapse d-none d-lg-flex justify-content-between align-items-center w-100">
+        <div class="mx-auto d-flex align-items-center bg-white rounded-pill px-2 py-1 desktop-search-bar border shadow-sm"
+          style="width: 100%; max-width: 550px">
+          
+          <div class="dropdown border-end pe-2 me-2">
+            <button class="btn btn-sm border-0 dropdown-toggle fw-semibold text-dark d-flex align-items-center gap-2"
+              type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+              <i class="fa-solid fa-location-dot text-primary" style="color: blue !important;"></i>
+              <span id="desktopNavCity">Lucknow</span>
             </button>
-          </form> -->
+            
+            <ul class="dropdown-menu border-0 shadow mt-2 p-0 rounded-3" style="width: 250px; overflow: hidden;">
+              <div class="p-2 border-bottom bg-light sticky-top">
+                <input type="text" class="form-control form-control-sm shadow-none border-0 rounded-pill px-3" 
+                       id="desktopCitySearch" placeholder="Search city..." onkeyup="filterCity('desktop')">
+              </div>
+              <div class="city-scroll-list" id="desktopCityList" style="max-height: 250px; overflow-y: auto;">
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Lucknow')">Lucknow</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Kanpur')">Kanpur</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Delhi')">Delhi</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Mumbai')">Mumbai</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Noida')">Noida</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Agra')">Agra</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Varanasi')">Varanasi</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Pune')">Pune</a></li>
+              </div>
+            </ul>
+          </div>
 
-          <div class="d-flex align-items-center gap-3 ms-4">
-            <a
-              href="add-business.html"
-              class="nav-link fw-semibold text-dark d-flex align-items-center gap-1 text-nowrap"
-            >
-              <i class="fa-solid fa-plus-circle text-danger"></i> Add Business
-            </a>
-            <div class="vr text-secondary opacity-25"></div>
-            <a href="#" class="nav-link fw-medium text-dark text-nowrap"
-              >Login</a
-            >
-            <a
-              href="#"
-              class="btn btn-outline-danger btn-sm px-4 py-2 rounded-pill fw-semibold text-nowrap"
-              style="border-color: #e62e2e; color: #e62e2e"
-            >
-              Register
-            </a>
+          <div class="input-group border-0">
+            <input type="text" class="form-control border-0 bg-transparent shadow-none"
+              placeholder="Search decorators, venues..." />
+            <button class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center p-2"
+              style="width: 35px; height: 35px; background-color: blue; border:none;">
+              <i class="fa-solid fa-magnifying-glass text-white small"></i>
+            </button>
           </div>
         </div>
-      </div>
-    </nav>
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
-      <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title fw-bold" style="color: #e62e2e">
-          <i class="fa-solid fa-champagne-glasses me-2"></i>Event Bucket
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-        ></button>
-      </div>
-
-      <div class="offcanvas-body d-flex flex-column">
-        <ul class="navbar-nav fs-5 gap-3 mt-3">
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
-              >Home</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
-              >Services</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
-              >Categories</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-medium border-bottom pb-2" href="#"
-              >Contact</a
-            >
-          </li>
-        </ul>
-
-        <div class="mt-5 d-flex flex-column gap-3 mb-4">
-          <a href="#" class="btn btn-outline-danger w-100 fw-semibold">
-            <i class="fa-solid fa-plus-circle me-2"></i>Add your business
-          </a>
-          <div class="d-flex gap-2">
-            <a href="#" class="btn btn-light w-50 border fw-medium">Login</a>
-            <a
-              href="#"
-              class="btn btn-danger w-50 fw-medium"
-              style="background-color: #e62e2e; border: none"
-              >Register</a
-            >
-          </div>
+        <div class="d-flex align-items-center gap-3 ms-4">
+          <a href="add-business.html" class="nav-link fw-semibold text-dark text-nowrap"><i
+              class="fa-solid fa-plus-circle" style="color: blue;"></i> Add Business</a>
+          <div class="vr text-secondary opacity-25"></div>
+          <a href="#" class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill fw-semibold text-nowrap"
+            style="border-color: blue; color: blue">Login</a>
         </div>
       </div>
     </div>
+  </nav>
 
-    <!-- ================== Search Bar Section ================ -->
-    <section
-      class="directory-hero position-relative d-flex align-items-center justify-content-center"
-    >
-      <div
-        class="position-absolute top-0 start-0 w-100 h-100"
-        style="z-index: -2"
-      >
-        <!-- <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2070&q=80&quot;" 
-         alt="Background" class="w-100 object-fit-cover"> -->
-      </div>
-      <div
-        class="position-absolute top-0 start-0 w-100 h-100 bg-overlay"
-        style="z-index: -1"
-      ></div>
+  <div class="d-lg-none position-fixed start-0 end-0 bg-white border-bottom shadow-sm px-3 py-2" style="top: 55px; z-index: 1030">
+    <div class="d-flex gap-2 align-items-center">
+      
+      <div class="dropdown flex-shrink-0">
+        <button class="btn btn-outline-primary rounded-pill btn-sm fw-bold d-flex align-items-center gap-1" type="button"
+          data-bs-toggle="dropdown" data-bs-auto-close="outside" style="border-color: blue; color: blue; padding: 6px 12px">
+          <i class="fa-solid fa-location-dot"></i>
+          <span id="mobileSelectedCity">Lucknow</span>
+          <i class="fa-solid fa-caret-down ms-1 small"></i>
+        </button>
 
-      <div class="container position-relative z-1 text-center">
-        <div class="row justify-content-center">
-          <div class="col-lg-10 col-xl-9">
-            <!-- <h1 class="hero-heading fw-bold text-white mb-4">
-          Find Top Businesses & Service Providers in <span class="text-warning">Lucknow</span>
-        </h1> -->
-
-            <div
-              class="search-wrapper bg-white p-1 rounded-3 shadow-lg mx-auto mb-4"
-            >
-              <form class="d-md-flex align-items-center">
-                <div class="input-group border-end-md px-2 py-2">
-                  <span
-                    class="input-group-text bg-transparent border-0 text-danger p-0 pe-2"
-                  >
-                    <i class="fa-solid fa-location-dot"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none p-0 fw-medium text-dark"
-                    value="Lucknow (UP)"
-                    placeholder="Location"
-                  />
-                </div>
-
-                <hr class="d-md-none my-0 mx-3 border-secondary-subtle" />
-
-                <div class="input-group px-2 py-2 w-100">
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none p-0 fw-medium text-dark"
-                    placeholder="Search in Lucknow (UP)..."
-                  />
-                </div>
-
-                <div class="p-1">
-                  <button
-                    type="button"
-                    class="btn btn-danger rounded-2 px-3 py-2 fw-bold h-100 w-100 w-md-auto"
-                  >
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            <!-- <div>
-          <a href="#" class="btn btn-dark connect-btn rounded-pill px-4 py-2 fw-bold text-uppercase">
-            Connect with Top Businesses in Lucknow
-          </a>
-        </div> -->
+        <ul class="dropdown-menu shadow border-0 mt-2 p-0 rounded-3" style="width: 220px; overflow: hidden;">
+          <div class="p-2 border-bottom bg-light sticky-top">
+            <input type="text" class="form-control form-control-sm shadow-none border-0 rounded-pill px-3" 
+                   id="mobileCitySearch" placeholder="Search city..." onkeyup="filterCity('mobile')">
           </div>
+          <div class="city-scroll-list" id="mobileCityList" style="max-height: 200px; overflow-y: auto;">
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Lucknow')">Lucknow</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Kanpur')">Kanpur</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Delhi')">Delhi</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Mumbai')">Mumbai</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Noida')">Noida</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Agra')">Agra</a></li>
+          </div>
+        </ul>
+      </div>
+
+      <div class="flex-grow-1">
+        <div class="input-group border rounded-pill overflow-hidden">
+          <span class="input-group-text bg-light border-0 text-secondary ps-3"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" class="form-control bg-light border-0 shadow-none small py-2" placeholder="Search..." style="font-size: 0.9rem" />
         </div>
       </div>
-    </section>
-
-    <!-- <section class="hero-section">
-      <div
-        class="position-absolute top-0 start-0 w-100 h-100"
-        style="
-          background-image: url(&quot;https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2070&q=80&quot;);
-          background-size: cover;
-          background-position: center;
-          z-index: -2;
-        "
-      ></div>
-      <div
-        class="position-absolute top-0 start-0 w-100 h-100"
-        style="
-          background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.3),
-            rgba(0, 0, 0, 0.8)
-          );
-          z-index: -1;
-        "
-      ></div>
-
-      <div class="container position-relative" style="z-index: 1">
-        <div class="row justify-content-center text-center">
-          <div class="col-lg-10">
-            <span
-              class="badge bg-danger bg-opacity-75 mb-3 px-3 py-2 rounded-pill fw-light"
-              >Plan Perfect Moments</span
-            >
-            <h1
-              class="display-3 fw-bold mb-4 text-white"
-              style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)"
-            >
-              Crafting Complete <br />
-              <span class="text-danger">Event Experiences</span>
-            </h1>
-            <p class="lead mb-5 px-md-5 text-white opacity-75">
-              From intimate gatherings to grand celebrations, we bring your
-              vision to life.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section> -->
+    </div>
+  </div>
+  <!-- ==================== Navbar END=================== -->
 
     <section class="py-5 bg-light">
       <div class="container py-4">

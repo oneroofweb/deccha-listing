@@ -69,3 +69,53 @@ function loadMoreContent(btn) {
     contentBox.style.maxHeight = currentHeight + "px"; // Open step
   }
 }
+
+// =========================== Custom Scrollbar for City Dropdown =========================
+// Filter City Logic
+function filterCity(view) {
+  let inputId = view === 'desktop' ? 'desktopCitySearch' : 'mobileCitySearch';
+  let listId = view === 'desktop' ? 'desktopCityList' : 'mobileCityList';
+
+  let filter = document.getElementById(inputId).value.toLowerCase();
+  let listContainer = document.getElementById(listId);
+  let items = listContainer.getElementsByTagName('li');
+
+  for (let i = 0; i < items.length; i++) {
+    let a = items[i].getElementsByTagName("a")[0];
+    let txtValue = a.textContent || a.innerText;
+    
+    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+      items[i].style.display = "";
+    } else {
+      items[i].style.display = "none";
+    }
+  }
+}
+
+// Select City & Close Dropdown Logic
+function selectCity(cityName) {
+  // Update text on both Desktop and Mobile spans
+  document.getElementById('desktopNavCity').innerText = cityName;
+  document.getElementById('mobileSelectedCity').innerText = cityName;
+  
+  // Save to LocalStorage if needed
+  localStorage.setItem('selectedCity', cityName);
+
+  // Automatically close all open dropdowns after selection
+  const dropdowns = document.querySelectorAll('.dropdown-menu.show');
+  dropdowns.forEach(dropdown => {
+    dropdown.classList.remove('show');
+  });
+  
+  // Optional: Redirect
+  // window.location.href = cityName.toLowerCase() + ".html";
+}
+
+// On page load, get saved city
+document.addEventListener("DOMContentLoaded", function() {
+  let savedCity = localStorage.getItem('selectedCity');
+  if (savedCity) {
+    document.getElementById('desktopNavCity').innerText = savedCity;
+    document.getElementById('mobileSelectedCity').innerText = savedCity;
+  }
+});

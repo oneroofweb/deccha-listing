@@ -23,177 +23,103 @@
   </head>
 
   <body class="bg-light">
-    <nav
-      class="navbar navbar-expand-lg bg-white sticky-top py-2 shadow-sm"
-      style="z-index: 1040"
-    >
-      <div class="container-fluid container-lg">
-        <a
-          class="navbar-brand fw-bold d-flex align-items-center gap-2 me-4"
-          href="index.html"
-          style="font-size: 1.5rem; color: blue !important"
-        >
-          <i class="fa-solid fa-champagne-glasses"></i> Deecha
-        </a>
-        <button
-          class="navbar-toggler border-0 shadow-none"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#mobileMenu"
-        >
-          <span class="fa-solid fa-bars-staggered fa-lg text-dark"></span>
+<nav class="navbar navbar-expand-lg bg-white sticky-top py-2 shadow-sm" style="z-index: 1040">
+    <div class="container-fluid container-lg">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2 me-4" href="index.html"
+        style="font-size: 1.5rem; color: blue !important">
+        <i class="fa-solid fa-champagne-glasses"></i> Deecha
+      </a>
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#mobileMenu">
+        <span class="fa-solid fa-bars-staggered fa-lg text-dark"></span>
+      </button>
+
+      <div class="collapse navbar-collapse d-none d-lg-flex justify-content-between align-items-center w-100">
+        <div class="mx-auto d-flex align-items-center bg-white rounded-pill px-2 py-1 desktop-search-bar border shadow-sm"
+          style="width: 100%; max-width: 550px">
+          
+          <div class="dropdown border-end pe-2 me-2">
+            <button class="btn btn-sm border-0 dropdown-toggle fw-semibold text-dark d-flex align-items-center gap-2"
+              type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+              <i class="fa-solid fa-location-dot text-primary" style="color: blue !important;"></i>
+              <span id="desktopNavCity">Lucknow</span>
+            </button>
+            
+            <ul class="dropdown-menu border-0 shadow mt-2 p-0 rounded-3" style="width: 250px; overflow: hidden;">
+              <div class="p-2 border-bottom bg-light sticky-top">
+                <input type="text" class="form-control form-control-sm shadow-none border-0 rounded-pill px-3" 
+                       id="desktopCitySearch" placeholder="Search city..." onkeyup="filterCity('desktop')">
+              </div>
+              <div class="city-scroll-list" id="desktopCityList" style="max-height: 250px; overflow-y: auto;">
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Lucknow')">Lucknow</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Kanpur')">Kanpur</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Delhi')">Delhi</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Mumbai')">Mumbai</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Noida')">Noida</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Agra')">Agra</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Varanasi')">Varanasi</a></li>
+                <li><a class="dropdown-item py-2 city-item" href="#" onclick="selectCity('Pune')">Pune</a></li>
+              </div>
+            </ul>
+          </div>
+
+          <div class="input-group border-0">
+            <input type="text" class="form-control border-0 bg-transparent shadow-none"
+              placeholder="Search decorators, venues..." />
+            <button class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center p-2"
+              style="width: 35px; height: 35px; background-color: blue; border:none;">
+              <i class="fa-solid fa-magnifying-glass text-white small"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-3 ms-4">
+          <a href="add-business.html" class="nav-link fw-semibold text-dark text-nowrap"><i
+              class="fa-solid fa-plus-circle" style="color: blue;"></i> Add Business</a>
+          <div class="vr text-secondary opacity-25"></div>
+          <a href="#" class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill fw-semibold text-nowrap"
+            style="border-color: blue; color: blue">Login</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="d-lg-none position-fixed start-0 end-0 bg-white border-bottom shadow-sm px-3 py-2" style="top: 55px; z-index: 1030">
+    <div class="d-flex gap-2 align-items-center">
+      
+      <div class="dropdown flex-shrink-0">
+        <button class="btn btn-outline-primary rounded-pill btn-sm fw-bold d-flex align-items-center gap-1" type="button"
+          data-bs-toggle="dropdown" data-bs-auto-close="outside" style="border-color: blue; color: blue; padding: 6px 12px">
+          <i class="fa-solid fa-location-dot"></i>
+          <span id="mobileSelectedCity">Lucknow</span>
+          <i class="fa-solid fa-caret-down ms-1 small"></i>
         </button>
 
-        <div
-          class="collapse navbar-collapse d-none d-lg-flex justify-content-between align-items-center w-100"
-        >
-          <div
-            class="mx-auto d-flex align-items-center bg-white rounded-pill px-2 py-1 desktop-search-bar"
-            style="width: 100%; max-width: 550px"
-          >
-            <div class="dropdown border-end pe-2 me-2">
-              <button
-                class="btn btn-sm border-0 dropdown-toggle fw-semibold text-dark d-flex align-items-center gap-2"
-                type="button"
-                data-bs-toggle="dropdown"
-              >
-                <i class="fa-solid fa-location-dot text-primary"></i>
-                <span id="desktopNavCity">Lucknow</span>
-              </button>
-              <ul class="dropdown-menu border-0 shadow mt-2">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onclick="updateCity('Lucknow')"
-                    >Lucknow</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    onclick="updateCity('Kanpur')"
-                    >Kanpur</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="input-group border-0">
-              <input
-                type="text"
-                class="form-control border-0 bg-transparent shadow-none"
-                placeholder="Search decorators, venues..."
-              />
-              <button
-                class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center p-2"
-                style="width: 35px; height: 35px; background-color: blue"
-              >
-                <i class="fa-solid fa-magnifying-glass text-white small"></i>
-              </button>
-            </div>
+        <ul class="dropdown-menu shadow border-0 mt-2 p-0 rounded-3" style="width: 220px; overflow: hidden;">
+          <div class="p-2 border-bottom bg-light sticky-top">
+            <input type="text" class="form-control form-control-sm shadow-none border-0 rounded-pill px-3" 
+                   id="mobileCitySearch" placeholder="Search city..." onkeyup="filterCity('mobile')">
           </div>
-          <div class="d-flex align-items-center gap-3 ms-4">
-            <a href="add-business.html" class="nav-link fw-semibold text-dark text-nowrap"
-              ><i class="fa-solid fa-plus-circle text-primary"></i> Add
-              Business</a
-            >
-            <div class="vr text-secondary opacity-25"></div>
-            <a
-              href="#"
-              class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill fw-semibold text-nowrap"
-              style="border-color: blue; color: blue"
-              >Login</a
-            >
+          <div class="city-scroll-list" id="mobileCityList" style="max-height: 200px; overflow-y: auto;">
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Lucknow')">Lucknow</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Kanpur')">Kanpur</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Delhi')">Delhi</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Mumbai')">Mumbai</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Noida')">Noida</a></li>
+            <li><a class="dropdown-item py-2 small city-item" href="#" onclick="selectCity('Agra')">Agra</a></li>
           </div>
-        </div>
-      </div>
-    </nav>
-
-    <div
-      class="d-lg-none position-fixed start-0 end-0 bg-white border-bottom shadow-sm px-3 py-2"
-      style="top: 70px; z-index: 1030"
-    >
-      <div class="d-flex gap-2 align-items-center">
-        <div class="dropdown flex-shrink-0">
-          <button
-            class="btn btn-outline-primary rounded-pill btn-sm fw-bold d-flex align-items-center gap-1"
-            type="button"
-            data-bs-toggle="dropdown"
-            style="border-color: blue; color: blue; padding: 6px 12px"
-          >
-            <i class="fa-solid fa-location-dot"></i>
-            <span id="mobileSelectedCity">Lucknow</span>
-            <i class="fa-solid fa-caret-down ms-1 small"></i>
-          </button>
-          <ul
-            class="dropdown-menu shadow border-0 mt-1"
-            style="border-radius: 10px"
-          >
-            <li>
-              <a
-                class="dropdown-item small"
-                href="#"
-                onclick="updateCity('Lucknow')"
-                >Lucknow</a
-              >
-            </li>
-            <li>
-              <a
-                class="dropdown-item small"
-                href="#"
-                onclick="updateCity('Kanpur')"
-                >Kanpur</a
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="flex-grow-1">
-          <div class="input-group">
-            <span
-              class="input-group-text bg-light border-end-0 rounded-start-pill ps-3 text-secondary"
-              ><i class="fa-solid fa-magnifying-glass"></i
-            ></span>
-            <input
-              type="text"
-              class="form-control bg-light border-start-0 rounded-end-pill shadow-none small"
-              placeholder="Search..."
-              style="font-size: 0.9rem"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="offcanvas offcanvas-start"
-      tabindex="-1"
-      id="mobileMenu"
-      style="z-index: 1050"
-    >
-      <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title fw-bold" style="color: blue">
-          Deecha
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-        ></button>
-      </div>
-      <div class="offcanvas-body d-flex flex-column">
-        <ul class="navbar-nav fs-5 gap-3 mt-3">
-          <li class="nav-item">
-            <a class="nav-link text-dark border-bottom pb-2" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark border-bottom pb-2" href="#"
-              >Services</a
-            >
-          </li>
         </ul>
       </div>
+
+      <div class="flex-grow-1">
+        <div class="input-group border rounded-pill overflow-hidden">
+          <span class="input-group-text bg-light border-0 text-secondary ps-3"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" class="form-control bg-light border-0 shadow-none small py-2" placeholder="Search..." style="font-size: 0.9rem" />
+        </div>
+      </div>
     </div>
+  </div>
+  <!-- ==================== Navbar END=================== -->
 
     <section class="py-4 bg-light mt-5 mt-lg-0">
       <div class="container-fluid container-lg">
@@ -235,7 +161,7 @@
                 data-bs-auto-close="outside"
                 id="btnLocality"
               >
-                Locality
+                Localities
               </button>
               <div
                 class="dropdown-menu p-2 shadow border-0 custom-dropdown-menu"
@@ -272,6 +198,85 @@
                     href="#"
                     onclick="selectFilter(this, 'btnLocality')"
                     >Indira Nagar</a
+                  >
+                </div>
+              </div>
+            </div>
+
+                        <div class="dropdown">
+              <button
+                class="btn filter-pill dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                id="btnCategory"
+              >
+                Category
+              </button>
+              <div
+                class="dropdown-menu p-2 shadow border-0 custom-dropdown-menu"
+              >
+                <div class="input-group mb-2 border rounded-1 bg-light">
+                  <input
+                    type="text"
+                    class="form-control border-0 shadow-none bg-transparent ps-2 dropdown-search"
+                    placeholder="Search..."
+                  />
+                </div>
+                <div class="list-options custom-scrollbar">
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnCategory')"
+                    >Wedding</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnCategory')"
+                    >Birthday Party</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnCategory')"
+                    >Corporate</a
+                  >
+                </div>
+              </div>
+            </div>
+
+                        <div class="dropdown">
+              <button
+                class="btn filter-pill dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                id="btnSubCat"
+              >
+                Sub-Category
+              </button>
+              <div
+                class="dropdown-menu p-2 shadow border-0 custom-dropdown-menu"
+              >
+                <div class="list-options custom-scrollbar">
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnSubCat')"
+                    >Balloon Decor</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnSubCat')"
+                    >Flower Decor</a
+                  >
+                  <a
+                    class="option-link"
+                    href="#"
+                    onclick="selectFilter(this, 'btnSubCat')"
+                    >Catering</a
                   >
                 </div>
               </div>
@@ -319,85 +324,6 @@
                   >
                     <span>Any Rating</span>
                   </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="dropdown">
-              <button
-                class="btn filter-pill dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                data-bs-auto-close="outside"
-                id="btnCategory"
-              >
-                Category
-              </button>
-              <div
-                class="dropdown-menu p-2 shadow border-0 custom-dropdown-menu"
-              >
-                <div class="input-group mb-2 border rounded-1 bg-light">
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none bg-transparent ps-2 dropdown-search"
-                    placeholder="Search..."
-                  />
-                </div>
-                <div class="list-options custom-scrollbar">
-                  <a
-                    class="option-link"
-                    href="#"
-                    onclick="selectFilter(this, 'btnCategory')"
-                    >Wedding</a
-                  >
-                  <a
-                    class="option-link"
-                    href="#"
-                    onclick="selectFilter(this, 'btnCategory')"
-                    >Birthday Party</a
-                  >
-                  <a
-                    class="option-link"
-                    href="#"
-                    onclick="selectFilter(this, 'btnCategory')"
-                    >Corporate</a
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div class="dropdown">
-              <button
-                class="btn filter-pill dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                data-bs-auto-close="outside"
-                id="btnSubCat"
-              >
-                Sub-Category
-              </button>
-              <div
-                class="dropdown-menu p-2 shadow border-0 custom-dropdown-menu"
-              >
-                <div class="list-options custom-scrollbar">
-                  <a
-                    class="option-link"
-                    href="#"
-                    onclick="selectFilter(this, 'btnSubCat')"
-                    >Balloon Decor</a
-                  >
-                  <a
-                    class="option-link"
-                    href="#"
-                    onclick="selectFilter(this, 'btnSubCat')"
-                    >Flower Decor</a
-                  >
-                  <a
-                    class="option-link"
-                    href="#"
-                    onclick="selectFilter(this, 'btnSubCat')"
-                    >Catering</a
-                  >
                 </div>
               </div>
             </div>
@@ -779,5 +705,6 @@
         dropdownInstance.hide();
       }
     </script>
+    <script src="/script.js"></script>
   </body>
 </html>
